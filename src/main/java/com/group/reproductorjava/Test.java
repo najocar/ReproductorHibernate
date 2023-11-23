@@ -3,6 +3,8 @@ package com.group.reproductorjava;
 import com.group.reproductorjava.model.Entity.Author;
 import com.group.reproductorjava.model.DAOs.*;
 import com.group.reproductorjava.model.Entity.*;
+import com.group.reproductorjava.utils.Manager;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,8 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Test {
-    private static EntityManager manager;
-    private static EntityManagerFactory emf;
+//    private static EntityManager manager;
+//    private static EntityManagerFactory emf;
     public static void main(String[] args) throws SQLException {
 //        Artista artista = new Artista(-1,"jose","foto","España");
 //        Artista artista = new ArtistaDAO(5);
@@ -31,28 +33,21 @@ public class Test {
 //        new UsuarioDAO(usuario).saveUsuario();
 
 
-
-
-
-
-
-
-
-        emf= Persistence.createEntityManagerFactory("aplicacion");
-        manager = emf.createEntityManager();
+        Manager.emf= Persistence.createEntityManagerFactory("aplicacion");
+        Manager.manager = Manager.emf.createEntityManager();
 
         Author a1 = new Author(1L, "Carlos Serrano", LocalDate.parse("1980-06-01"));
         Author a2 = new Author(2L, "Miguel de Cervantes", LocalDate.parse("1547-09-22"));
 
-        manager.getTransaction().begin();
-        manager.persist(a1);
-        manager.persist(a2);
-        manager.getTransaction().commit();
+        Manager.manager.getTransaction().begin();
+        Manager.manager.persist(a1);
+        Manager.manager.persist(a2);
+        Manager.manager.getTransaction().commit();
         list();
     }
 
     public static  void list(){
-        List<Author> authors = manager.createQuery("FROM Author").getResultList();
+        List<Author> authors = Manager.manager.createQuery("FROM Author").getResultList();
         System.out.println("Autores: " + authors.size());
         for(Author a:authors){
             System.out.println(a);

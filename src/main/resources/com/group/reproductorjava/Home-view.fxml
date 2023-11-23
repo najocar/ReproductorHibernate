@@ -10,34 +10,53 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.HomeViewController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #BCDFDF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.HomeViewController">
    <children>
+      <Pane layoutX="868.0" layoutY="-8.0" prefHeight="301.0" prefWidth="173.0" style="-fx-background-color: #439D9D; -fx-rotate: 40deg;" />
       <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="758.0" prefWidth="251.0">
          <children>
             <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/User-avatar.svg.png" />
-               </image></ImageView>
-            <Label fx:id="userName" layoutX="99.0" layoutY="216.0" text="Username" />
-            <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="119.0" text="Salir" />
+               </image>
+            </ImageView>
+            <Label fx:id="userName" layoutX="77.0" layoutY="214.0" text="Username" textAlignment="CENTER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="119.0" text="&lt; Salir" />
          </children>
       </Pane>
       <Pane layoutX="250.0" layoutY="-1.0" prefHeight="755.0" prefWidth="751.0">
          <children>
-            <TableView fx:id="ListTable" layoutX="55.0" layoutY="97.0" prefHeight="552.0" prefWidth="627.0">
+            <TableView fx:id="ListTable" layoutX="55.0" layoutY="97.0" prefHeight="205.0" prefWidth="627.0">
               <columns>
                 <TableColumn fx:id="NameColumn" prefWidth="245.66668701171875" text="Nombre" />
                 <TableColumn fx:id="DescriptionColumn" minWidth="0.0" prefWidth="377.0" text="Descripción" />
               </columns>
             </TableView>
-            <Label layoutX="55.0" layoutY="53.0" text="Listas de Reproducción">
+            <Label layoutX="55.0" layoutY="53.0" text="Tus Listas de Reproducción">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <Button layoutX="612.0" layoutY="684.0" mnemonicParsing="false" onAction="#goList" text="Abrir Lista" />
-            <Button layoutX="520.0" layoutY="684.0" mnemonicParsing="false" onAction="#newList" text="Nueva Lista" />
-            <Button layoutX="426.0" layoutY="684.0" mnemonicParsing="false" onAction="#deleteList" text="Borrar Lista" />
+            <Button layoutX="603.0" layoutY="68.0" mnemonicParsing="false" onAction="#newList" style="-fx-background-color: grey;" text="Nueva Lista" textFill="WHITE" />
+            <Button layoutX="516.0" layoutY="68.0" mnemonicParsing="false" onAction="#deleteList" style="-fx-background-color: grey;" text="Borrar Lista" textFill="WHITE" />
+            <TableView fx:id="ListTable1" layoutX="55.0" layoutY="370.0" prefHeight="301.0" prefWidth="627.0">
+               <columns>
+                  <TableColumn fx:id="NameColumn1" prefWidth="245.66668701171875" text="Nombre" />
+                  <TableColumn fx:id="DescriptionColumn1" minWidth="0.0" prefWidth="377.0" text="Descripción" />
+               </columns>
+            </TableView>
+            <Label layoutX="55.0" layoutY="326.0" text="Tus Suscripciones">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="588.0" layoutY="341.0" mnemonicParsing="false" onAction="#newList" text="Explorar Listas" />
+            <Button layoutX="455.0" layoutY="341.0" mnemonicParsing="false" onAction="#newList" text="Eliminar Suscripción" />
          </children>
       </Pane>
    </children>
