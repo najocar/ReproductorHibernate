@@ -14,7 +14,7 @@ public class Artista implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)//autoincrement
     @Column(name = "id")
-    private Long id;
+    private int  id;
     @Column(name = "nombre")
     private String name;
     @Column(name = "nacionalidad")
@@ -25,7 +25,7 @@ public class Artista implements Serializable {
     @OneToMany(mappedBy = "artista",cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Disco> discos=new ArrayList<>();
 
-    public Artista(Long id, String name, String nacionality, String photo) {
+    public Artista(int id, String name, String nacionality, String photo) {
         this.id = id;
         this.name = name;
         this.nacionality = nacionality;
@@ -34,15 +34,15 @@ public class Artista implements Serializable {
 
     public Artista(){ }
 
-    public Artista(Long id) {
+    public Artista(int id) {
         this.id=id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
