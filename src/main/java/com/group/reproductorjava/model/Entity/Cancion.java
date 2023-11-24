@@ -1,9 +1,15 @@
 package com.group.reproductorjava.model.Entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "cancion")
 public class Cancion {
+    @Id
+    @Column(name = "id")
     int id;
+    @Column(name = "name")
     String name;
     int duration;//en segundos
     String gender;
