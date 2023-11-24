@@ -1,17 +1,27 @@
 package com.group.reproductorjava.model.Entity;
 
-import com.group.reproductorjava.model.DAOs.CancionDAO;
-
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class Disco {
+@Entity
+@Table(name = "DISCO")
+public class Disco implements Serializable {
+    @Id
+    @Column(name = "ID")
     private int id;
+    @Column(name = "NOMBRE")
     private String nombre;
+    @Column(name = "FECHA")
     private LocalDate fecha;
+    @Column(name = "PHOTO")
     private String photo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ARTISTA")
     private Artista artista;
+    @OneToMany(mappedBy = "disco", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Cancion> canciones;
 
     public Disco() {
@@ -71,10 +81,6 @@ public class Disco {
     }
 
     public List<Cancion> getCanciones() {
-        if(canciones == null){
-            List<Cancion> aux = CancionDAO.getCancionesByList(getId());
-            if(aux != null) canciones = aux;
-        }
         return canciones;
     }
 
