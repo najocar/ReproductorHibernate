@@ -9,7 +9,10 @@ import java.util.Objects;
 @Entity
 @Table (name = "Lista")
 public class Lista implements Serializable {
+    private static final long serialVersionUID =1L;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column (name = "id")
     private int id;
     @Column (name = "name")
