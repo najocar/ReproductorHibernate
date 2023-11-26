@@ -1,6 +1,7 @@
 package com.group.reproductorjava.controller;
 
 import com.group.reproductorjava.model.DAOs.CancionDAO;
+import com.group.reproductorjava.model.DAOs.ListaDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
 import com.group.reproductorjava.model.Entity.Cancion;
 import com.group.reproductorjava.HelloApplication;
@@ -49,7 +50,8 @@ public class CancionListViewController implements Initializable {
 
     public void loadTable(){
         cancionList.clear();
-        List<Cancion> aux = CancionDAO.getCancionesByList(ControlDTO.getLista().getId());
+
+        List<Cancion> aux = ListaDAO.getCancionesOfTheList(ControlDTO.getLista());
         if(aux == null) return;
         cancionList.addAll(aux);
         System.out.println(cancionList);

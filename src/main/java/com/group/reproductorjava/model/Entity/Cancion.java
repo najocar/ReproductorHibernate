@@ -1,13 +1,27 @@
 package com.group.reproductorjava.model.Entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "cancion")
 public class Cancion {
+    private static final long serialVersionUID =1L;
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @Column(name = "id")
     int id;
+    @Column(name = "name")
     String name;
+    @Column(name = "duration")
     int duration;//en segundos
+    @Column(name = "gender")
     String gender;
+    @Column(name = "nreproductions")
     int nReproductions;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cancion")
     Disco disco;
 
     public Cancion(int id) {
