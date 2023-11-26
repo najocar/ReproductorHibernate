@@ -110,6 +110,6 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      * If dont return null, success
      */
     public List<Lista> getLista(){
-        return this.getPlaylists();
+        return (List<Lista>) this.getPlaylists();
     }
 }

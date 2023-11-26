@@ -11,7 +11,7 @@ public class Author implements Serializable {
     private static final long serialVersionUID =1L;
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO) //autoincremental
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
     @Column(name = "NAME")

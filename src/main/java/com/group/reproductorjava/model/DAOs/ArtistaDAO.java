@@ -9,6 +9,7 @@ import com.group.reproductorjava.model.Entity.Artista;
 import com.group.reproductorjava.model.Entity.Disco;
 import com.group.reproductorjava.model.interfaces.IArtistaDAO;
 import com.group.reproductorjava.utils.LoggerClass;
+import com.group.reproductorjava.utils.Manager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -231,17 +232,17 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
             manager.close();
         }
     }
-
-    /**
-     * metodo getdiscos que obtiene los discos que tengan el id del artista
-     *
-     * @return list con los discos
-     */
-    public List<Disco> getDiscos() {
-        if (super.getDiscos() == null) {
-            setDiscos(DiscoDAO.getAllDiscosByArtista(this));
-        }
-        return super.getDiscos();
-    }
+//
+//    /**
+//     * metodo getdiscos que obtiene los discos que tengan el id del artista
+//     *
+//     * @return list con los discos
+//     */
+//    public List<Disco> getDiscos() {
+//        if (super.getDiscos() == null) {
+//            setDiscos(DiscoDAO.getAllDiscosByArtista(this));
+//        }
+//        return super.getDiscos();
+//    }
 
 }

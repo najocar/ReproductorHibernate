@@ -114,14 +114,16 @@ public class NewListController implements Initializable {
     public void createList() throws SQLException {
 
 
-        Lista lista = new Lista(-1, nameListField.getText(), userDao, descListField.getText());
+        Lista lista = new Lista(12, nameListField.getText(), userDao, descListField.getText());
 
         ListaDAO l = new ListaDAO(lista);
 
-        l.save();
+        l.save(lista);
         for (Cancion cancion : can) {
 //            l.addCancion(cancion);
-            l.saveSongRelation(cancion);
+            l.addCancion(cancion);
+            System.out.println(l);
+            l.save(lista);
         }
         goHome();
 

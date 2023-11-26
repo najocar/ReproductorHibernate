@@ -3,6 +3,7 @@ package com.group.reproductorjava.controller;
 import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
 import com.group.reproductorjava.HelloApplication;
+import com.group.reproductorjava.model.Entity.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LoginViewController {
 
@@ -32,13 +34,17 @@ public class LoginViewController {
             showError("El campo del nickname está vacío");
         } else {
 
-            UsuarioDAO UDAO=new UsuarioDAO(1);
-            if(UDAO.getUsuario(nickname)){
-                ControlDTO.setUser(UDAO);
-                HelloApplication.setRoot("Home-view");
-            }
-            else{
-                showError("no se ha encontrado el nickname");
+//            UsuarioDAO UDAO=new UsuarioDAO(1);
+            List<Usuario> users= UsuarioDAO.getAllUsuarios();
+            for (Usuario usuario : users) {
+                if (nickname.equals(usuario.getName())) {
+                    ControlDTO.setUser(usuario);
+                    HelloApplication.setRoot("Home-view");
+                    break; // Si ya encontramos a Raúl, no es necesario seguir buscando
+                }
+                else{
+                    showError("no se ha encontrado el nickname");
+                }
             }
         }
     }

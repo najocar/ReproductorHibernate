@@ -4,9 +4,7 @@ import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
@@ -16,6 +14,7 @@ public class Usuario implements Serializable {
     private final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID")
     int id;
 
@@ -35,7 +34,7 @@ public class Usuario implements Serializable {
     List<Comentario> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "userCreator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<Lista> playlists = new ArrayList<>();
+    Set<Lista> playlists = new HashSet<>();  // Cambiado de List a Set
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -108,15 +107,15 @@ public class Usuario implements Serializable {
         this.commentList = commentList;
     }
 
-    public List<Lista> getPlaylists() {
+    public Set<Lista> getPlaylists() {
         if(playlists == null){
-            List<Lista> aux = new UsuarioDAO(this).getLista();
+            Set<Lista> aux = (Set<Lista>) new UsuarioDAO(this).getLista();
             if(aux != null) playlists = aux;
         }
         return playlists;
     }
 
-    public void setPlaylists(List<Lista> playlists) {
+    public void setPlaylists(Set<Lista> playlists) {
         this.playlists = playlists;
     }
 

@@ -39,14 +39,16 @@ public class Test {
 
 
 
-        Author a1 = new Author(1L, "Carlos Serrano", LocalDate.parse("1980-06-01"));
-        Author a2 = new Author(2L, "Miguel de Cervantes", LocalDate.parse("1547-09-22"));
+//        Author a1 = new Author(1L, "Carlos Serrano", LocalDate.parse("1980-06-01"));
+        Usuario user1 = new Usuario(1,"Jose", "jose@gmail.com","photo", 1);
+
+        Lista lista = new Lista(1,"Lista 1", user1, "lista de prueba");
 
         entityManager.getTransaction().begin();
-        entityManager.persist(a1);
-        entityManager.persist(a2);
+//        entityManager.persist(a1);
+        entityManager.merge(lista);
         entityManager.getTransaction().commit();
-        list();
+//        list();
     }
 
     public static  void list(){

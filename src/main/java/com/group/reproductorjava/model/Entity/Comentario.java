@@ -11,6 +11,7 @@ public class Comentario {
     private final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ID")
     int id;
 

@@ -10,6 +10,7 @@ import java.util.Objects;
 @Table(name = "DISCO")
 public class Disco implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private int id;
     @Column(name = "NOMBRE")

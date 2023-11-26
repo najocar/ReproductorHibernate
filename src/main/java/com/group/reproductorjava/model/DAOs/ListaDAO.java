@@ -7,6 +7,7 @@ import com.group.reproductorjava.utils.LoggerClass;
 import com.group.reproductorjava.utils.Manager;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.sql.*;
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class ListaDAO extends Lista implements IListaDAO {
     @Override
     public boolean getLista(int id) {
         Boolean result = false;
-//        manager.getTransaction().begin();
         Lista a = manager.find(Lista.class, id);
         if (a!=null){
             setId(a.getId());
@@ -56,8 +56,6 @@ public class ListaDAO extends Lista implements IListaDAO {
             setUserCreator(a.getUserCreator());
             result = true;
         }
-//        manager.getTransaction().commit();
-//        manager.close();
         return result;
     }
 
@@ -71,20 +69,32 @@ public class ListaDAO extends Lista implements IListaDAO {
         return listas;
     }
 
-    @Override
-    public boolean save() {
+
+    public boolean save(Lista lista) {
+        EntityTransaction transaction = null;
+
         try {
-            manager.getTransaction().begin();
-            manager.persist(this);
-            manager.getTransaction().commit();
+            transaction = manager.getTransaction();
+            transaction.begin();
+
+            // Utiliza merge en lugar de persist
+            manager.merge(lista);
+
+            transaction.commit();
             logger.info("Saved Correctly");
         } catch (Exception e) {
-            logger.warning("Failed to save \n" + e.getMessage());
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            logger.warning("Failed to save list \n" + e.getMessage());
+            return false;
         } finally {
-            manager.close();
+            // manager.close();
         }
+
         return true;
     }
+
 
 //    public boolean saveSongRelation(Cancion song) throws SQLException {
 //        if (canciones==null) getCanciones();
@@ -127,7 +137,7 @@ public class ListaDAO extends Lista implements IListaDAO {
             }
             e.printStackTrace();
         } finally {
-            manager.close();
+//            manager.close();
         }
         return true;
     }
@@ -148,8 +158,9 @@ public class ListaDAO extends Lista implements IListaDAO {
 
 
     public boolean addCancion(Cancion cancion) {
-        if (!canciones.contains(cancion))
-            return canciones.add(cancion);
+        if (!this.canciones.contains(cancion)){
+            return this.canciones.add(cancion);
+        }
         return false;
     }
 
