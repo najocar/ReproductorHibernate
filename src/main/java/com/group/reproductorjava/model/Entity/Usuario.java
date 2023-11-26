@@ -2,16 +2,47 @@ package com.group.reproductorjava.model.Entity;
 
 import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Usuario {
+
+@Entity
+@Table(name="USER")
+public class Usuario implements Serializable {
+
+    private final long serialVersionUID = 1L;
+
+    @Id
+    @Column(name="ID")
     int id;
+
+    @Column(name="NOMBRE")
     String name;
+
+    @Column(name="EMAIL")
     String email;
+
+    @Column(name="FOTO")
     String photo;
+
+    @Column(name="ROL")
     int rol;
-    List<Lista> playlists;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Comentario> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userCreator", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Lista> playlists = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "SUSCRIPCIONES",
+            joinColumns = @JoinColumn(name = "ID_USUARIO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_LISTA"))
+    List<Lista> subscriptionList = new ArrayList<>();
 
     public Usuario() {
         this(-1, "", "", "", 1);
@@ -69,6 +100,14 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public List<Comentario> getCommentList() {
+        return this.commentList;
+    }
+
+    public void setCommentList(List<Comentario> commentList) {
+        this.commentList = commentList;
+    }
+
     public List<Lista> getPlaylists() {
         if(playlists == null){
             List<Lista> aux = new UsuarioDAO(this).getLista();
@@ -79,6 +118,14 @@ public class Usuario {
 
     public void setPlaylists(List<Lista> playlists) {
         this.playlists = playlists;
+    }
+
+    public List<Lista> getSubscriptionList() {
+        return subscriptionList;
+    }
+
+    public void setSubscriptionList(List<Lista> subscriptionList) {
+        this.subscriptionList = subscriptionList;
     }
 
     @Override

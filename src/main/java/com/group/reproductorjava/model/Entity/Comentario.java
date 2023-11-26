@@ -1,14 +1,31 @@
 package com.group.reproductorjava.model.Entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name="COMENTARIO")
 public class Comentario {
+
+    private final long serialVersionUID = 1L;
+
+    @Id
+    @Column(name="ID")
     int id;
+
+    @Column(name="FECHA")
     LocalDate date;
+
+    @Column(name="MENSAJE")
     String message;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_USUARIO")
     Usuario usuario;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_LISTA")
     Lista lista;
 
     public Comentario(int id) {
@@ -25,7 +42,6 @@ public class Comentario {
 
     public Comentario(){
         this(-1, null, "", null, null);
-
     }
 
     public int getId() {
@@ -41,7 +57,6 @@ public class Comentario {
     }
 
     public void setDate(LocalDate date) {
-
         this.date = date;
     }
 

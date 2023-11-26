@@ -3,27 +3,17 @@ package com.group.reproductorjava.model.DAOs;
 import com.group.reproductorjava.model.Entity.Lista;
 import com.group.reproductorjava.model.Entity.Usuario;
 import com.group.reproductorjava.model.interfaces.IUsuarioDAO;
-import com.group.reproductorjava.model.Connection.MariaDBConnection;
 import com.group.reproductorjava.utils.LoggerClass;
+import com.group.reproductorjava.utils.Manager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class UsuarioDAO extends Usuario implements IUsuarioDAO {
 
-    private final static String SELECTALL = "SELECT id, nombre, correo, foto, rol FROM user";
-    private final static String SELECTBYID = "SELECT id, nombre, correo, foto, rol FROM user WHERE id = ?";
-    private final static String SELECTBYNAME = "SELECT id, nombre, correo, foto, rol FROM user WHERE nombre LIKE ?";
-    private final static String INSERT = "INSERT INTO user (nombre, correo, foto, rol) VALUES (?,?,?,?)";
-    private final static String DELETE = "DELETE FROM user WHERE id = ?";
-    private final static String SELECTLISTBYUSEROWNER = "SELECT id, nombre, id_user, description FROM lista WHERE id_user = ?";
-    private final static String UPDATE = "UPDATE user SET nombre = ?, correo = ?, foto = ? WHERE id = ?";
-
     static LoggerClass logger = new LoggerClass(UsuarioDAO.class.getName());
+    private static EntityManager manager = Manager.getEntityManager();
+
 
     public UsuarioDAO(int id){
         getUsuario(id);
@@ -45,66 +35,17 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      */
     @Override
     public boolean getUsuario(int id) {
-        Connection conn = MariaDBConnection.getConnection();
-        if(conn == null) return false;
-
-        try(PreparedStatement ps = conn.prepareStatement(SELECTBYID)){
-            ps.setInt(1, id);
-
-            if(ps.execute()){
-                try(ResultSet rs = ps.getResultSet()){
-                    if(rs.next()){
-                        setId(rs.getInt("id"));
-                        setName(rs.getString("nombre"));
-                        setEmail(rs.getString("correo"));
-                        setPhoto(rs.getString("foto"));
-                        setRol(rs.getInt("rol"));
-                        return true;
-                    }
-                }
-            }
-
-        }catch (SQLException e){
-            logger.warning("Error to try get Usuario by id");
-            logger.warning(e.getMessage());
-            return false;
+        boolean result = false;
+        Usuario user = manager.find(Usuario.class, id);
+        if(user != null) {
+            setId(user.getId());
+            setName(user.getName());
+            setEmail(user.getEmail());
+            setPhoto(user.getPhoto());
+            setRol(user.getRol());
+            result = true;
         }
-        return false;
-    }
-
-    /**
-     * Method to get User by name to user
-     * @param name: string
-     * @return boolean
-     * true if success
-     */
-    @Override
-    public boolean getUsuario(String name) {
-        Connection conn = MariaDBConnection.getConnection();
-        if(conn == null) return false;
-
-        try(PreparedStatement ps = conn.prepareStatement(SELECTBYNAME)){
-            ps.setString(1, name);
-
-            if(ps.execute()){
-                try(ResultSet rs = ps.getResultSet()){
-                    if(rs.next()){
-                        setId(rs.getInt("id"));
-                        setName(rs.getString("nombre"));
-                        setEmail(rs.getString("correo"));
-                        setPhoto(rs.getString("foto"));
-                        setRol(rs.getInt("rol"));
-                        return true;
-                    }
-                }
-            }
-
-        }catch (SQLException e){
-            logger.warning("Error to try get Usuario by name");
-            logger.warning(e.getMessage());
-            return false;
-        }
-        return false;
+        return result;
     }
 
     /**
@@ -113,34 +54,7 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      * if dont return null, success
      */
     public static List<Usuario> getAllUsuarios() {
-        Connection conn = MariaDBConnection.getConnection();
-        if(conn == null) return null;
-
-        List<Usuario> result = new ArrayList<>();
-
-        try(PreparedStatement ps = conn.prepareStatement(SELECTALL)){
-            if(ps.execute()){
-
-                try(ResultSet rs = ps.getResultSet()){
-                    while(rs.next()){
-                        Usuario user = new Usuario(
-                            rs.getInt("id"),
-                            rs.getString("nombre"),
-                            rs.getString("correo"),
-                            rs.getString("foto"),
-                            rs.getInt("rol")
-                        );
-                        result.add(user);
-                    }
-                }
-            }
-
-        }catch (SQLException e){
-            logger.warning("Error to try get all Usuario");
-            logger.warning(e.getMessage());
-            return null;
-        }
-        return result;
+        return manager.createQuery("FROM Usuario").getResultList();
     }
 
     /**
@@ -151,27 +65,17 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      */
     @Override
     public boolean saveUsuario() {
-        if(getId() != -1){
-            return updateUsuario();
+        try {
+            manager.getTransaction().begin();
+            manager.persist(this);
+            manager.getTransaction().commit();
+            logger.info("Saved Correctly");
+        } catch (Exception e) {
+            logger.warning("Failed to save \n" + e.getMessage());
+        } finally {
+            manager.close();
         }
-        else{
-            Connection conn = MariaDBConnection.getConnection();
-            if(conn == null) return false;
-
-            try(PreparedStatement ps = conn.prepareStatement(INSERT)){
-                ps.setString(1, getName());
-                ps.setString(2, getEmail());
-                ps.setString(3, getPhoto());
-                ps.setInt(4, getRol());
-
-                if(ps.executeUpdate() == 1) return true;
-                return false;
-            }catch (SQLException e){
-                logger.warning("Error to try save Usuario");
-                logger.warning(e.getMessage());
-                return false;
-            }
-        }
+        return true;
     }
 
     /**
@@ -181,18 +85,23 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      */
     @Override
     public boolean deleteUsuario() {
-        Connection conn = MariaDBConnection.getConnection();
-        if(conn == null) return false;
-
-        try(PreparedStatement ps = conn.prepareStatement(DELETE)){
-            ps.setInt(1, getId());
-            if(ps.executeUpdate()==1) return true;
-            return false;
-        }catch (SQLException e) {
-            logger.warning("Error to try delete Usuario");
-            logger.warning(e.getMessage());
-            return false;
+        Usuario aux = this;
+        try {
+            manager.getTransaction().begin();
+            if(!manager.contains(this)) {
+                aux = manager.find(Usuario.class, this);
+            }
+            manager.remove(aux);
+            manager.getTransaction().commit();
+        } catch (Exception e) {
+            if(manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+            logger.warning("Failed to remove \n" + e.getMessage());
+        } finally {
+            manager.close();
         }
+        return true;
     }
 
     /**
@@ -201,56 +110,6 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      * If dont return null, success
      */
     public List<Lista> getLista(){
-        Connection conn = MariaDBConnection.getConnection();
-        if(conn == null) return null;
-        List<Lista> result = new ArrayList<>();
-
-        try(PreparedStatement ps = conn.prepareStatement(SELECTLISTBYUSEROWNER)){
-            ps.setInt(1, getId());
-
-            if (ps.execute()) {
-                try(ResultSet rs = ps.getResultSet()){
-                    while(rs.next()){
-                        Lista list = new Lista(
-                                rs.getInt("id"),
-                                rs.getString("name"),
-                                new UsuarioDAO(rs.getInt("id_user")),
-                                rs.getString("descripcion")
-                        );
-                        result.add(list);
-                    }
-                }
-            }
-        }catch (SQLException e){
-            logger.warning("Error to try get all Lista on Usuario");
-            logger.warning(e.getMessage());
-            return null;
-        }
-
-        return result;
-    }
-
-    /**
-     * Method to update Usuario
-     * @return boolean
-     * true if success
-     * params to update (nombre, correo, foto)
-     */
-    public boolean updateUsuario(){
-        if(getId() == 1) return false;
-        Connection conn = MariaDBConnection.getConnection();
-        if(conn == null) return false;
-
-        try(PreparedStatement ps = conn.prepareStatement(UPDATE)){
-            ps.setString(1, getName());
-            ps.setString(2, getEmail());
-            ps.setString(3, getPhoto());
-            if(ps.executeUpdate() == 1) return true;
-            return false;
-        }catch (SQLException e){
-            logger.warning("Error to try update Usuario");
-            logger.warning(e.getMessage());
-            return false;
-        }
+        return this.getPlaylists();
     }
 }
