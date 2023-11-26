@@ -1,25 +1,38 @@
 package com.group.reproductorjava.model.Entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Artista {
-   private int id;
-    private String name;
-    private String photo;
-   private String nacionality;
-    protected List<Disco> discos;
+@Entity
+@Table(name = "Artista")
+public class Artista implements Serializable {
+    private static final long serialVersionUID=1L;
 
-    public Artista(int id, String name, String photo, String nacionality) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)//autoincrement
+    @Column(name = "id")
+    private int  id;
+    @Column(name = "nombre")
+    private String name;
+    @Column(name = "nacionalidad")
+     private String nacionality;
+    @Column(name = "foto")
+    private String photo;
+
+    @OneToMany(mappedBy = "artista",cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Disco> discos=new ArrayList<>();
+
+    public Artista(int id, String name, String nacionality, String photo) {
         this.id = id;
         this.name = name;
-        this.photo = photo;
         this.nacionality = nacionality;
+        this.photo = photo;
     }
 
-    public Artista(){
-        this(0,"","","");
-    }
+    public Artista(){ }
 
     public Artista(int id) {
         this.id=id;
@@ -41,20 +54,20 @@ public class Artista {
         this.name = name;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     public String getNacionality() {
         return nacionality;
     }
 
     public void setNacionality(String nacionality) {
         this.nacionality = nacionality;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public List<Disco> getDiscos() {
