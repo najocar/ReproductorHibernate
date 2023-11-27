@@ -59,8 +59,6 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
             logger.info("Saved Correctly");
         } catch (Exception e) {
             logger.warning("Failed to save \n" + e.getMessage());
-        } finally {
-            manager.close();
         }
         return true;
     }
@@ -80,8 +78,6 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
                 manager.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            manager.close();
         }
         return true;
     }

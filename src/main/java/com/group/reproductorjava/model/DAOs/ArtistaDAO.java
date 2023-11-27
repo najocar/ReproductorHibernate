@@ -70,8 +70,6 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
                 manager.getTransaction().rollback();
             }
             return false;
-        } finally {
-            manager.close();
         }
     }
 
@@ -100,8 +98,6 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
                 manager.getTransaction().rollback();
             }
             return false;
-        } finally {
-            manager.close();
         }
     }
 
@@ -131,8 +127,6 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
                 manager.getTransaction().rollback();
             }
             return false;
-        } finally {
-            manager.close();
         }
     }
 
@@ -165,8 +159,6 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
                 manager.getTransaction().rollback();
             }
             return false;
-        } finally {
-            manager.close();
         }
     }
 
@@ -204,8 +196,6 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
                 manager.getTransaction().rollback();
             }
             return false;
-        } finally {
-            manager.close();
         }
     }
 
@@ -228,8 +218,6 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
                 manager.getTransaction().rollback();
             }
             return null;
-        } finally {
-            manager.close();
         }
     }
 //

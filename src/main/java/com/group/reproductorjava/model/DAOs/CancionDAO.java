@@ -93,8 +93,6 @@ public class CancionDAO extends Cancion implements ICancionDAO {
             logger.info("Saved Correctly");
         } catch (Exception e) {
             logger.warning("Failed to save \n" + e.getMessage());
-        } finally {
-            manager.close();
         }
         return true;
     }
@@ -118,8 +116,6 @@ public class CancionDAO extends Cancion implements ICancionDAO {
                 manager.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            manager.close();
         }
         return true;
     }

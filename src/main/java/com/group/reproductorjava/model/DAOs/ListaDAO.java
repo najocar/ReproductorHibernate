@@ -70,15 +70,22 @@ public class ListaDAO extends Lista implements IListaDAO {
     }
 
 
-    public boolean save(Lista lista) {
+    public boolean save() {
         EntityTransaction transaction = null;
 
         try {
             transaction = manager.getTransaction();
             transaction.begin();
 
-            // Utiliza merge en lugar de persist
-            manager.merge(lista);
+            Lista lista = new Lista();
+            lista.setName(this.getName());
+            lista.setDescription(this.getDescription());
+            lista.setUserCreator(this.getUserCreator());
+            lista.setCanciones(this.getCanciones());
+            lista.setComentarios(this.getComentarios());
+            System.out.println(lista.getClass());
+
+            manager.persist(lista);
 
             transaction.commit();
             logger.info("Saved Correctly");
@@ -88,8 +95,6 @@ public class ListaDAO extends Lista implements IListaDAO {
             }
             logger.warning("Failed to save list \n" + e.getMessage());
             return false;
-        } finally {
-            // manager.close();
         }
 
         return true;
