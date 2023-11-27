@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.CancionListViewController">
    <children>
-      <TableView fx:id="table" layoutX="254.0" layoutY="84.0" prefHeight="333.0" prefWidth="723.0">
+      <TableView fx:id="tableSong" layoutX="254.0" layoutY="84.0" prefHeight="333.0" prefWidth="723.0">
         <columns>
           <TableColumn fx:id="colName" prefWidth="720.9538421630859" text="CANCIONES" />
         </columns>
@@ -28,14 +28,14 @@
       </Label>
       <Button fx:id="btnPlay" layoutX="867.0" layoutY="417.0" mnemonicParsing="false" onAction="#play" text="PLAY" />
       <Button fx:id="btnExit" layoutX="61.0" layoutY="681.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="132.0" text="VOLVER" />
-      <TableView layoutX="254.0" layoutY="487.0" prefHeight="229.0" prefWidth="723.0">
+      <TableView fx:id="tableComment" layoutX="254.0" layoutY="487.0" prefHeight="229.0" prefWidth="723.0">
         <columns>
-          <TableColumn prefWidth="160.0" text="Usuario" />
-          <TableColumn minWidth="0.0" prefWidth="560.0" text="Comentario" />
+          <TableColumn fx:id="colUsuarioComment" prefWidth="160.0" text="Usuario" />
+          <TableColumn fx:id="colComentarioComment" minWidth="0.0" prefWidth="560.0" text="Comentario" />
         </columns>
       </TableView>
-      <Button layoutX="254.0" layoutY="460.0" mnemonicParsing="false" text="Comentar" />
-      <TextField layoutX="335.0" layoutY="460.0" prefHeight="25.0" prefWidth="641.0" />
+      <Button fx:id="btnComment" layoutX="254.0" layoutY="460.0" mnemonicParsing="false" onAction="#addComment" text="Comentar" />
+      <TextField fx:id="inputComment" layoutX="335.0" layoutY="460.0" prefHeight="25.0" prefWidth="641.0" />
    </children>
 
 </AnchorPane>

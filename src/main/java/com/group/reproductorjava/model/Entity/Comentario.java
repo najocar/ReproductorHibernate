@@ -105,7 +105,7 @@ public class Comentario {
                 ", date=" + date +
                 ", message='" + message + '\'' +
                 ", usuario=" + usuario + '\'' +
-                ", lista=" + lista +
+                ", name_lista=" + lista.getName() + '\'' +
                 '}';
     }
 }
