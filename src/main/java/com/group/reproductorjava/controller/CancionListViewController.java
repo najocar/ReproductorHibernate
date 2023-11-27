@@ -99,11 +99,11 @@ public class CancionListViewController implements Initializable {
     }
 
     @FXML
-    public void goExit(){
+    public void goBack(){
         try {
-            HelloApplication.setRoot("LoginView");
+            HelloApplication.setRoot("Home-view");
         } catch (IOException err) {
-            logger.warning("Error navigate to LoginView");
+            logger.warning("Error navigate to HomeView");
             logger.warning(err.getMessage());
         }
     }
