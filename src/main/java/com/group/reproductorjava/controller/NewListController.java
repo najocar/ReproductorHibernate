@@ -118,13 +118,13 @@ public class NewListController implements Initializable {
 
         ListaDAO l = new ListaDAO(lista);
 
-        l.save(lista);
+//        l.save();
         for (Cancion cancion : can) {
 //            l.addCancion(cancion);
-            l.addCancion(cancion);
-            System.out.println(l);
-            l.save(lista);
+                l.addCancion(cancion);
+                System.out.println(l);
         }
+        l.save();
         goHome();
 
 

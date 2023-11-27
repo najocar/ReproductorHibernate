@@ -1,5 +1,8 @@
 package com.group.reproductorjava;
 
+import com.group.reproductorjava.model.DAOs.UsuarioDAO;
+import com.group.reproductorjava.model.DTOs.ControlDTO;
+import com.group.reproductorjava.model.Entity.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +16,11 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginView.fxml"));
+        ControlDTO.setUser(UsuarioDAO.getAllUsuarios().get(0)); // mockusuario
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Home-view.fxml"));//mock vista
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginView.fxml"));
         scene = new Scene(fxmlLoader.load(), 1000, 750);
-        stage.setTitle("Hello!");
+        stage.setTitle("Reproductor Java!");
         stage.setScene(scene);
         stage.show();
     }

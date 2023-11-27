@@ -72,8 +72,6 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
             logger.info("Saved Correctly");
         } catch (Exception e) {
             logger.warning("Failed to save \n" + e.getMessage());
-        } finally {
-            manager.close();
         }
         return true;
     }
@@ -98,8 +96,6 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
                 manager.getTransaction().rollback();
             }
             logger.warning("Failed to remove \n" + e.getMessage());
-        } finally {
-            manager.close();
         }
         return true;
     }
