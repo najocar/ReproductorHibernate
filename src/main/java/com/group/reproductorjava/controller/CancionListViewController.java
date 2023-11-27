@@ -6,7 +6,7 @@ import com.group.reproductorjava.model.DTOs.ControlDTO;
 import com.group.reproductorjava.model.Entity.Cancion;
 import com.group.reproductorjava.HelloApplication;
 import com.group.reproductorjava.model.Entity.Comentario;
-import com.group.reproductorjava.model.Entity.Lista;
+import com.group.reproductorjava.model.DTOs.ComentarioDTO;
 import com.group.reproductorjava.utils.LoggerClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,7 +36,7 @@ public class CancionListViewController implements Initializable {
     private TableColumn colName;
 
     @FXML
-    private TableView<Comentario> tableComment;
+    private TableView<ComentarioDTO> tableComment;
 
     @FXML
     private TableColumn colUsuarioComment, colComentarioComment;
@@ -45,7 +45,7 @@ public class CancionListViewController implements Initializable {
     private Label labelListaName, labelUserName;
 
     private ObservableList<Cancion> songList;
-    private ObservableList<Comentario> commentList;
+    private ObservableList<ComentarioDTO> commentList;
 
     static LoggerClass logger = new LoggerClass(CancionListViewController.class.getName());
 
@@ -55,13 +55,13 @@ public class CancionListViewController implements Initializable {
         this.colName.setCellValueFactory(new PropertyValueFactory("name"));
 
         commentList = FXCollections.observableArrayList();
-        this.colUsuarioComment.setCellValueFactory(new PropertyValueFactory("usuario"));
+        this.colUsuarioComment.setCellValueFactory(new PropertyValueFactory("name"));
         this.colComentarioComment.setCellValueFactory(new PropertyValueFactory("message"));
 
         loadTable();
         loadView();
     }
-
+;
     public void loadTable(){
         loadTableSong();
         loadTableComments();
@@ -80,7 +80,10 @@ public class CancionListViewController implements Initializable {
         commentList.clear();
         List<Comentario> auxCommentList = ComentarioDAO.getComentariosByLista(ControlDTO.getLista().getId());
         if(auxCommentList == null) return;
-        commentList.addAll(auxCommentList);
+
+        for(Comentario comment: auxCommentList) {
+            commentList.add(new ComentarioDTO(comment.getUsuario().getName(), comment.getMessage()));
+        }
         tableComment.setItems(commentList);
         tableComment.refresh();
     }
