@@ -102,6 +102,18 @@ public class HomeViewController implements Initializable {
     }
 
     @FXML
+    public void goAllListView() {
+        if (selectList()!=null) {
+            try {
+                ControlDTO.setLista(selectList());
+                HelloApplication.setRoot("AllListView");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @FXML
     public void deleteList() {
         if (selectList()!=null) {
             new ListaDAO(selectList()).deleteLista(selectList());
