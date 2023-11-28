@@ -39,8 +39,8 @@ public class Usuario implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "SUSCRIPCIONES",
-            joinColumns = @JoinColumn(name = "ID_USUARIO"),
-            inverseJoinColumns = @JoinColumn(name = "ID_LISTA"))
+            joinColumns = @JoinColumn(name = "ID_USUARIO", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "ID_LISTA", nullable = false))
     List<Lista> subscriptionList = new ArrayList<>();
 
     public Usuario() {
@@ -49,6 +49,13 @@ public class Usuario implements Serializable {
 
     public Usuario(int id, String name, String email, String photo, int rol) {
         this.id = id;
+        this.name = name;
+        this.email = email;
+        this.photo = photo;
+        this.rol = rol;
+    }
+
+    public Usuario(String name, String email, String photo, int rol) {
         this.name = name;
         this.email = email;
         this.photo = photo;
@@ -147,7 +154,8 @@ public class Usuario implements Serializable {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", photo='" + photo + '\'' +
-                ", rol=" + rol +
+                ", rol=" + rol + '\'' +
+                ", subscriptions='" + this.subscriptionList +
                 '}';
     }
 }
