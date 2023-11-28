@@ -60,36 +60,6 @@ public class ComentarioDAO extends Comentario implements IComentarioDAO {
     }
 
     /**
-     * Method to save Comentario
-     * @return boolean
-     * true if success
-     */
-    @Override
-    public boolean saveComentario() {
-        EntityTransaction transaction = null;
-        try {
-            transaction = manager.getTransaction();
-            transaction.begin();
-
-            Comentario aux = new Comentario();
-            aux.setId(this.getId());
-            aux.setDate(this.getDate());
-            aux.setMessage(this.getMessage());
-            aux.setUsuario(this.getUsuario());
-            aux.setLista(this.getLista());
-
-            manager.persist(aux);
-            transaction.commit();
-            logger.info("Saved Correctly");
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) transaction.rollback();
-            logger.warning("Failed to save \n" + e.getMessage());
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Method to remove Comentario
      * @return boolean
      * true if success

@@ -114,7 +114,7 @@ public class NewListController implements Initializable {
     public void createList() throws SQLException {
 
 
-        Lista lista = new Lista(12, nameListField.getText(), userDao, descListField.getText());
+        Lista lista = new Lista(-1, nameListField.getText(), userDao, descListField.getText());
 
         ListaDAO l = new ListaDAO(lista);
 

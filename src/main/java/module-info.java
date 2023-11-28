@@ -12,6 +12,7 @@ module com.group.reproductorjava {
     opens com.group.reproductorjava.controller to javafx.fxml;
 //    opens com.group.reproductorjava.model.Entity to javafx.base;
     opens com.group.reproductorjava.model.Entity to org.hibernate.orm.core, javafx.base;
+    opens com.group.reproductorjava.model.DTOs;
 //    opens com.group.reproductorjava.model.Entity;
 
     exports com.group.reproductorjava;
