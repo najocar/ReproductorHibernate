@@ -73,7 +73,8 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
             transaction.begin();
 
             Usuario aux = new Usuario();
-            aux.setId(this.getId());
+            if (this.getId()>0) aux = manager.find(Usuario.class, this.getId());
+
             aux.setName(this.getName());
             aux.setEmail(this.getEmail());
             aux.setPhoto(this.getPhoto());
@@ -84,8 +85,8 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
 
             manager.persist(aux);
             transaction.commit();
-            logger.info("Saved Correctly");
 
+            logger.info("Saved Correctly");
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) transaction.rollback();
             logger.warning("Failed to save \n" + e.getMessage());
@@ -126,4 +127,17 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
     public List<Lista> getLista(){
         return (List<Lista>) this.getPlaylists();
     }
+
+    public boolean addSubscription(Lista lista) {
+        if(this.getSubscriptionList().contains(lista)) return false;
+        this.getSubscriptionList().add(lista);
+        return true;
+    }
+
+    public boolean removeSubscription(Lista lista) {
+        if(!this.getSubscriptionList().contains(lista)) return false;
+        this.getSubscriptionList().remove(lista);
+        return true;
+    }
+
 }
