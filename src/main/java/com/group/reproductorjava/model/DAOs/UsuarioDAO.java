@@ -7,6 +7,7 @@ import com.group.reproductorjava.utils.LoggerClass;
 import com.group.reproductorjava.utils.Manager;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class UsuarioDAO extends Usuario implements IUsuarioDAO {
@@ -65,13 +66,30 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      */
     @Override
     public boolean saveUsuario() {
+        EntityTransaction transaction = null;
+
         try {
-            manager.getTransaction().begin();
-            manager.persist(this);
-            manager.getTransaction().commit();
+            transaction = manager.getTransaction();
+            transaction.begin();
+
+            Usuario aux = new Usuario();
+            aux.setId(this.getId());
+            aux.setName(this.getName());
+            aux.setEmail(this.getEmail());
+            aux.setPhoto(this.getPhoto());
+            aux.setRol(this.getRol());
+            aux.setCommentList(this.getCommentList());
+            aux.setPlaylists(this.getPlaylists());
+            aux.setSubscriptionList(this.getSubscriptionList());
+
+            manager.persist(aux);
+            transaction.commit();
             logger.info("Saved Correctly");
+
         } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) transaction.rollback();
             logger.warning("Failed to save \n" + e.getMessage());
+            return false;
         }
         return true;
     }

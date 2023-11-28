@@ -8,6 +8,7 @@ import com.group.reproductorjava.utils.LoggerClass;
 import com.group.reproductorjava.utils.Manager;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -65,13 +66,25 @@ public class ComentarioDAO extends Comentario implements IComentarioDAO {
      */
     @Override
     public boolean saveComentario() {
+        EntityTransaction transaction = null;
         try {
-            manager.getTransaction().begin();
-            manager.persist(this);
-            manager.getTransaction().commit();
+            transaction = manager.getTransaction();
+            transaction.begin();
+
+            Comentario aux = new Comentario();
+            aux.setId(this.getId());
+            aux.setDate(this.getDate());
+            aux.setMessage(this.getMessage());
+            aux.setUsuario(this.getUsuario());
+            aux.setLista(this.getLista());
+
+            manager.persist(aux);
+            transaction.commit();
             logger.info("Saved Correctly");
         } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) transaction.rollback();
             logger.warning("Failed to save \n" + e.getMessage());
+            return false;
         }
         return true;
     }
