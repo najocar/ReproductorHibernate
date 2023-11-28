@@ -20,7 +20,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnHome" layoutX="925.0" layoutY="417.0" mnemonicParsing="false" onAction="#goHome" text="INICIO" />
+      <Button fx:id="btnHome" layoutX="925.0" layoutY="417.0" mnemonicParsing="false" onAction="#goBack" text="INICIO" />
       <Label fx:id="labelUserName" layoutX="76.0" layoutY="37.0" text="USUARIO">
          <font>
             <Font size="24.0" />
