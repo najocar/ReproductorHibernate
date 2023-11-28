@@ -41,6 +41,13 @@ public class Comentario {
         this.lista = list;
     }
 
+    public Comentario(LocalDate date, String message, Usuario user, Lista list){
+        this.date = date;
+        this.message = message;
+        this.usuario = user;
+        this.lista = list;
+    }
+
     public Comentario(){
         this(-1, null, "", null, null);
     }

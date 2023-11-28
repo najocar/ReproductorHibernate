@@ -120,16 +120,18 @@ public class CancionListViewController implements Initializable {
     public void addComment() {
         String text = inputComment.getText();
         if(text.isEmpty() || text.isBlank()) return;
-        ListaDAO ldao = new ListaDAO(ControlDTO.getLista().getId());
+        ListaDAO ldao = new ListaDAO(ControlDTO.getLista());
 
-        System.out.println(ControlDTO.getLista());
-        ComentarioDAO aux = new ComentarioDAO(-1, LocalDate.now(), text, ControlDTO.getUser(), ldao);
+//        System.out.println(ControlDTO.getLista());
+        Comentario aux = new Comentario(-1, LocalDate.now(), text, ControlDTO.getUser(), ControlDTO.getLista());
+        System.out.println(aux);
 
 
         ldao.addComment(aux);
+        ldao.save();
 //        ldao.save();
 //        System.out.println(aux.getLista());
-        aux.saveComentario();
+//        aux.saveComentario();
 
     }
 

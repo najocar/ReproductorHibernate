@@ -85,6 +85,13 @@ public class ListaDAO extends Lista implements IListaDAO {
             lista.setComentarios(this.getComentarios());
             System.out.println(lista.getClass());
 
+            System.out.println(this);
+            if (this.getId()>0){
+                lista.setId(this.getId());
+                lista = manager.find(Lista.class, lista.getId());
+                System.out.println("lista: !!!"+lista);
+            }
+
             manager.persist(lista);
 
             transaction.commit();

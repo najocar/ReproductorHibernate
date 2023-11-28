@@ -64,37 +64,37 @@ public class ComentarioDAO extends Comentario implements IComentarioDAO {
      * @return boolean
      * true if success
      */
-//    @Override
-//    public boolean saveComentario() {
-//        Lista lista = this.getLista();
-//        EntityTransaction transaction = null;
-//        try {
-//            transaction = manager.getTransaction();
-//            transaction.begin();
-//
-//            Comentario aux = new Comentario();
-//            aux.setDate(this.getDate());
-//            aux.setMessage(this.getMessage());
-//            aux.setUsuario(this.getUsuario());
-//            aux.setLista(manager.find(Lista.class, lista.getId()));
-//
-//            System.out.println(aux.getLista() + "LISTA DE UN COMENTARIO");
-//
-//            manager.persist(aux);
-//            transaction.commit();
-//            logger.info("Saved Correctly");
-//        } catch (Exception e) {
-//            if (transaction != null && transaction.isActive()) transaction.rollback();
-//            logger.warning("Failed to save \n" + e.getMessage());
-//            return false;
-//        }
-//        return true;
-//    }
-
     @Override
     public boolean saveComentario() {
-        return false;
+        Lista lista = this.getLista();
+        EntityTransaction transaction = null;
+        try {
+            transaction = manager.getTransaction();
+            transaction.begin();
+
+            Comentario aux = new Comentario();
+            aux.setDate(this.getDate());
+            aux.setMessage(this.getMessage());
+            aux.setUsuario(this.getUsuario());
+            aux.setLista(manager.find(Lista.class, lista.getId()));
+
+            System.out.println(aux.getLista() + "LISTA DE UN COMENTARIO");
+
+            manager.persist(aux);
+            transaction.commit();
+            logger.info("Saved Correctly");
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) transaction.rollback();
+            logger.warning("Failed to save \n" + e.getMessage());
+            return false;
+        }
+        return true;
     }
+
+//    @Override
+//    public boolean saveComentario() {
+//        return false;
+//    }
 
     /**
      * Method to remove Comentario
