@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #BCDFDF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.HomeViewController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #BCDFDF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.AllListViewController">
     <children>
         <Pane layoutX="868.0" layoutY="-8.0" prefHeight="301.0" prefWidth="173.0" style="-fx-background-color: #439D9D; -fx-rotate: 40deg;" />
         <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="758.0" prefWidth="251.0">
@@ -25,15 +25,15 @@
                         <Font size="22.0" />
                     </font>
                 </Label>
-                <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="119.0" text="&lt; Volver" />
+                <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goHome" prefHeight="25.0" prefWidth="119.0" text="&lt; Volver" />
             </children>
         </Pane>
         <Pane layoutX="250.0" layoutY="-1.0" prefHeight="755.0" prefWidth="751.0">
             <children>
-                <TableView fx:id="ListTable" layoutX="55.0" layoutY="97.0" prefHeight="550.0" prefWidth="627.0">
+                <TableView fx:id="listTable" layoutX="55.0" layoutY="97.0" prefHeight="550.0" prefWidth="627.0">
                     <columns>
-                        <TableColumn fx:id="NameColumn" prefWidth="245.66668701171875" text="Nombre" />
-                        <TableColumn fx:id="DescriptionColumn" minWidth="0.0" prefWidth="377.0" text="Descripción" />
+                        <TableColumn fx:id="colName" prefWidth="245.66668701171875" text="Nombre" />
+                        <TableColumn fx:id="colDescription" minWidth="0.0" prefWidth="377.0" text="Descripción" />
                     </columns>
                 </TableView>
                 <Label layoutX="55.0" layoutY="53.0" text="Listas de Reproducción">
@@ -42,7 +42,7 @@
                     </font>
                 </Label>
                 <Button layoutX="521.0" layoutY="684.0" mnemonicParsing="false" onAction="#goList" text="Abrir Lista" />
-                <Button layoutX="609.0" layoutY="684.0" mnemonicParsing="false" onAction="#newList" text="Suscribirse" />
+                <Button layoutX="609.0" layoutY="684.0" mnemonicParsing="false" onAction="#subscribe" text="Suscribirse" />
             </children>
         </Pane>
     </children>

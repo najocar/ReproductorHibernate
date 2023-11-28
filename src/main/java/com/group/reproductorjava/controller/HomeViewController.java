@@ -102,6 +102,15 @@ public class HomeViewController implements Initializable {
     }
 
     @FXML
+    public void goAllListView() {
+        try {
+            HelloApplication.setRoot("AllListView");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
     public void deleteList() {
         if (selectList()!=null) {
             new ListaDAO(selectList()).deleteLista(selectList());
@@ -117,5 +126,16 @@ public class HomeViewController implements Initializable {
             result = aux;
         }
         return result;
+    }
+
+    @FXML
+    public void unsuscribe() {
+        Lista list = selectList();
+        if(list == null || ControlDTO.getUser() == null) return;
+
+        UsuarioDAO aux = new UsuarioDAO(ControlDTO.getUser());
+
+        aux.removeSubscription(list);
+        aux.saveUsuario();
     }
 }
