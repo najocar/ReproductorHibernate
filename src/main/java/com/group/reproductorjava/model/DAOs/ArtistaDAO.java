@@ -7,11 +7,13 @@ import java.util.List;
 import com.group.reproductorjava.model.Connection.MariaDBConnection;
 import com.group.reproductorjava.model.Entity.Artista;
 import com.group.reproductorjava.model.Entity.Disco;
+import com.group.reproductorjava.model.Entity.Lista;
 import com.group.reproductorjava.model.interfaces.IArtistaDAO;
 import com.group.reproductorjava.utils.LoggerClass;
 import com.group.reproductorjava.utils.Manager;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 public class ArtistaDAO extends Artista implements IArtistaDAO {
@@ -53,24 +55,31 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
      * @return false si no se guarda
      */
     public boolean saveArtista() {
+        EntityTransaction transaction = null;
+
         try {
-            manager.getTransaction().begin();
-            if (getId() != -1) {
-                manager.persist(this);
-            } else {
-                manager.persist(this);
-                manager.flush();
-            }
-            manager.getTransaction().commit();
+            transaction = manager.getTransaction();
+            transaction.begin();
+
+            Artista a= new Artista();
+            a.setName(this.getName());
+            a.setNacionality(this.getNacionality());
+            a.setPhoto(this.getPhoto());
+            a.setDiscos(this.getDiscos());
+            System.out.println(a.getClass());
+            manager.persist(a);
+
+            transaction.commit();
             logger.info("Saved Correctly");
-            return true;
         } catch (Exception e) {
-            logger.warning("Failed to save \n" + e.getMessage());
-            if (manager.getTransaction().isActive()) {
-                manager.getTransaction().rollback();
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
             }
+            logger.warning("Failed to save list \n" + e.getMessage());
             return false;
         }
+
+        return true;
     }
 
     /**
