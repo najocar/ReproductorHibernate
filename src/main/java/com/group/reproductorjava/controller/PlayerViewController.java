@@ -122,6 +122,7 @@ public class PlayerViewController {
             songDurationLabel.setText(String.valueOf(currentSong.getDuration()));
             songGenderLabel.setText(currentSong.getGender());
             songRepLabel.setText(String.valueOf(currentSong.getnReproductions()));
+            songDiscLabel.setText(String.valueOf(currentSong.getDisco()));
 
         }
         updateReproductions();

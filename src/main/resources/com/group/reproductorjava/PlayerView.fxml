@@ -93,7 +93,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="back_btn" layoutX="26.0" layoutY="422.0" mnemonicParsing="false" onAction="#goHome" prefHeight="43.0" prefWidth="112.0" style="-fx-background-color: rgb(0, 94, 222);" text="➕ SALIR" textFill="WHITE">
+            <Button fx:id="back_btn" layoutX="26.0" layoutY="422.0" mnemonicParsing="false" onAction="#goHome" prefHeight="43.0" prefWidth="112.0" style="-fx-background-color: rgb(0, 94, 222);" text="VOLVER" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
