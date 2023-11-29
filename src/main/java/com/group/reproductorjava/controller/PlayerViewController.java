@@ -41,6 +41,18 @@ public class PlayerViewController {
     private Label songNameLabel;
 
     @FXML
+    private Label songDurationLabel;
+
+    @FXML
+    private Label songGenderLabel;
+
+    @FXML
+    private Label songDiscLabel;
+
+    @FXML
+    private Label songRepLabel;
+
+    @FXML
     private Label userlabel;
 
     @FXML
@@ -107,9 +119,12 @@ public class PlayerViewController {
         Cancion currentSong = ControlDTO.getSong();
         if (currentSong != null){
             songNameLabel.setText(currentSong.getName());
+            songDurationLabel.setText(String.valueOf(currentSong.getDuration()));
+            songGenderLabel.setText(currentSong.getGender());
+            songRepLabel.setText(String.valueOf(currentSong.getnReproductions()));
+
         }
         updateReproductions();
-
     }
     /*
      * Actualiza el número de reproducciones de la canción seleccionada.

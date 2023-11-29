@@ -3,59 +3,111 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.PlayerViewController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #1f1f1f;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.PlayerViewController">
    <children>
-      <ImageView fx:id="image" fitHeight="112.0" fitWidth="138.0" layoutX="46.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/User-avatar.svg.png" />
-         </image>
-      </ImageView>
-      <ProgressBar layoutX="238.0" layoutY="570.0" prefHeight="18.0" prefWidth="657.0" progress="0.0" />
-      <Label fx:id="userlabel" layoutX="71.0" layoutY="142.0" text="USERNAME" />
-      <Label layoutX="235.0" layoutY="509.0" text="REPRODUCIENDO:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="back_btn" layoutX="31.0" layoutY="570.0" mnemonicParsing="false" onAction="#goHome" prefHeight="43.0" prefWidth="112.0" style="-fx-background-color: rgb(10, 87, 202);" text="➕ SALIR" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Label fx:id="songNameLabel" layoutX="235.0" layoutY="536.0" text="CANCION">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="494.0" fitWidth="789.0" layoutX="238.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="349.0" fitWidth="461.0" layoutX="251.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/good_times_with_bad_music_1050x700.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="play_btn" layoutX="524.0" layoutY="613.0" mnemonicParsing="false" onAction="#Play" prefHeight="43.0" prefWidth="52.0" style="-fx-background-color: rgb(10, 87, 202);" text="▶" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="stop_btn" layoutX="467.0" layoutY="613.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="42.0" style="-fx-background-color: rgb(10, 87, 202);" text="⏹" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="next_btn" layoutX="593.0" layoutY="613.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="52.0" style="-fx-background-color: rgb(10, 87, 202);" text="⏭" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="last_btn" layoutX="399.0" layoutY="613.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="52.0" style="-fx-background-color: rgb(10, 87, 202);" text="⏮" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      <AnchorPane layoutX="767.0" layoutY="62.0" prefHeight="485.0" prefWidth="200.0" style="-fx-background-color: #2c3e50;">
+         <children>
+            <Label layoutX="17.0" layoutY="14.0" text="REPRODUCIENDO" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="songNameLabel" layoutX="14.0" layoutY="79.0" text="CANCION" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="songGenderLabel" layoutX="15.0" layoutY="109.0" text="Gender" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="songDiscLabel" layoutX="19.0" layoutY="140.0" text="Disc" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="songDiscLabel1" layoutX="15.0" layoutY="172.0" text="Reproducciones" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="songRepLabel" layoutX="146.0" layoutY="172.0" text="0" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="songImage1" fitHeight="133.0" fitWidth="185.0" layoutX="12.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/good_times_with_bad_music_1050x700.jpg" />
+               </image>
+            </ImageView>
+            <Separator layoutY="42.0" prefWidth="200.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="639.0" prefHeight="112.0" prefWidth="1000.0" style="-fx-background-color: #2c3e50;">
+         <children>
+            <Button fx:id="play_btn" layoutX="494.0" layoutY="45.0" mnemonicParsing="false" onAction="#Play" prefHeight="43.0" prefWidth="52.0" style="-fx-background-color: rgb(0, 94, 222);" text="▶" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="stop_btn" layoutX="437.0" layoutY="45.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="42.0" style="-fx-background-color: rgb(0, 94, 222);" text="⏹" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="next_btn" layoutX="563.0" layoutY="45.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="52.0" style="-fx-background-color: rgb(0, 94, 222);" text="⏭" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="last_btn" layoutX="369.0" layoutY="45.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="52.0" style="-fx-background-color: rgb(0, 94, 222);" text="⏮" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <ProgressBar layoutX="41.0" layoutY="14.0" prefHeight="18.0" prefWidth="919.0" progress="0.0" style="-fx-accent: #3498db;" />
+            <Label fx:id="songDurationLabel" layoutX="41.0" layoutY="40.0" prefHeight="33.0" prefWidth="66.0" text="0:00:00" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="39.0" layoutY="62.0" prefHeight="485.0" prefWidth="161.0" style="-fx-background-color: #2c3e50;">
+         <children>
+            <Label fx:id="userlabel" layoutX="35.0" layoutY="179.0" text="USERNAME" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="back_btn" layoutX="26.0" layoutY="422.0" mnemonicParsing="false" onAction="#goHome" prefHeight="43.0" prefWidth="112.0" style="-fx-background-color: rgb(0, 94, 222);" text="➕ SALIR" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="9.0" layoutY="7.0" prefHeight="151.0" prefWidth="145.0" style="-fx-background-color: white;">
+               <children>
+                  <ImageView fx:id="image" fitHeight="112.0" fitWidth="138.0" layoutX="17.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/User-avatar.svg.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
