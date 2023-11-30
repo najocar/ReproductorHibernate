@@ -78,7 +78,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <ProgressBar layoutX="41.0" layoutY="14.0" prefHeight="18.0" prefWidth="919.0" progress="0.0" style="-fx-accent: #3498db;" />
+            <ProgressBar fx:id="pb" layoutX="41.0" layoutY="14.0" prefHeight="18.0" prefWidth="919.0" progress="0.0" style="-fx-accent: #3498db;" />
             <Label fx:id="songDurationLabel" layoutX="41.0" layoutY="40.0" prefHeight="33.0" prefWidth="66.0" text="0:00:00" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
