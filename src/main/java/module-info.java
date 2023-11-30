@@ -6,6 +6,9 @@ module com.group.reproductorjava {
     requires java.sql;
     requires java.persistence;
     requires org.hibernate.orm.core;
+    requires jlayer;
+    requires javafx.media;
+    requires java.desktop;
 
 //    opens com.group1.reproductorjava to javafx.fxml;
     opens com.group.reproductorjava;

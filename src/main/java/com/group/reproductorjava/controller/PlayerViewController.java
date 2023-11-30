@@ -5,13 +5,28 @@ import com.group.reproductorjava.HelloApplication;
 import com.group.reproductorjava.model.DAOs.CancionDAO;
 import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javafx.util.Duration;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javazoom.jl.decoder.Bitstream;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -62,6 +77,16 @@ public class PlayerViewController {
 
     UsuarioDAO userDao = new UsuarioDAO(2);
 
+    private boolean isPaused = false;
+    private String currentSongPath;
+    private Duration currentMediaTime;
+    private Player player;
+    private MediaPlayer mediaPlayer;
+
+    private Duration pauseTime;
+    private Timeline timeline;
+
+
     public void initialize(){
         setInfoUser();
     }
@@ -95,11 +120,51 @@ public class PlayerViewController {
     @FXML
     private void Play() {
         if (isPlaying) {
+            pause();
             play_btn.setText("▶");
         } else {
+            playSelectedSong();
             play_btn.setText("⏸");
         }
         isPlaying = !isPlaying;
+    }
+
+    private void playSelectedSong() {
+        try {
+            stop(); // Detener la reproducción actual antes de comenzar una nueva
+            String songPath = "src/main/resources/com/group/reproductorjava/songs/" + songNameLabel.getText() + ".mp3";
+            currentSongPath = songPath;
+
+            Media media = new Media(new File(songPath).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            mediaPlayer.setOnEndOfMedia(() -> stop());
+
+            if (currentMediaTime != null) {
+                mediaPlayer.seek(currentMediaTime);
+            }
+
+            mediaPlayer.play();
+            loadSelectedSong();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void pause() {
+        if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+            mediaPlayer.pause();
+            currentMediaTime = mediaPlayer.getCurrentTime();
+        }
+    }
+
+    private void stop() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            currentMediaTime = null;
+        }
+        isPlaying = false;
+        play_btn.setText("▶");
     }
 
     /**
@@ -109,6 +174,7 @@ public class PlayerViewController {
      */
     @FXML
     private void goHome() throws IOException {
+        stop();
         HelloApplication.setRoot("Home-view");
     }
 
@@ -138,7 +204,6 @@ public class PlayerViewController {
             CancionDAO cancionDAO= new CancionDAO(currentSong);
             cancionDAO.oneReproduction();
             ControlDTO.getSong().setnReproductions(ControlDTO.getSong().getnReproductions()+1);
-            }
         }
+    }
 }
-
