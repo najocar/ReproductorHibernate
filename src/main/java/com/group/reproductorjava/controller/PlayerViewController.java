@@ -37,7 +37,6 @@ public class PlayerViewController {
 
     @FXML
     private Button next_btn;
-
     @FXML
     private ImageView songImage;
 
