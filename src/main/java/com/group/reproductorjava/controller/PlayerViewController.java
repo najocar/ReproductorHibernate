@@ -28,6 +28,7 @@ import javazoom.jl.player.Player;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Controlador para la vista del reproductor de música.
@@ -88,6 +89,8 @@ public class PlayerViewController {
 
 
     public void initialize(){
+        Image defaultImage = new Image(getClass().getResourceAsStream("/com/group/reproductorjava/images/good_times_with_bad_music_1050x700.jpg"));
+        songImage.setImage(defaultImage);
         setInfoUser();
     }
 
@@ -183,13 +186,27 @@ public class PlayerViewController {
      */
     private void loadSelectedSong() {
         Cancion currentSong = ControlDTO.getSong();
-        if (currentSong != null){
+        if (currentSong != null) {
             songNameLabel.setText(currentSong.getName());
             songDurationLabel.setText(String.valueOf(currentSong.getDuration()));
             songGenderLabel.setText(currentSong.getGender());
             songRepLabel.setText(String.valueOf(currentSong.getnReproductions()));
             songDiscLabel.setText(String.valueOf(currentSong.getDisco()));
+            try {
+                String imagePath = "/com/group/reproductorjava/images/" + currentSong.getName() + ".jpg";
+                InputStream inputStream = getClass().getResourceAsStream(imagePath);
+                System.out.println(imagePath);
 
+                if (inputStream != null) {
+                    Image image = new Image(inputStream);
+                    songImage.setImage(null);
+                    songImage.setImage(image);
+                } else {
+                    System.err.println("Error al cargar la imagen. InputStream es nulo.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         updateReproductions();
     }
