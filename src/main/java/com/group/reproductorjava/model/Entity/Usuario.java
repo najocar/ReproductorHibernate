@@ -155,7 +155,7 @@ public class Usuario implements Serializable {
                 ", email='" + email + '\'' +
                 ", photo='" + photo + '\'' +
                 ", rol=" + rol + '\'' +
-                ", subscriptions='" + this.subscriptionList +
+                ", subscriptions='" + this.subscriptionList.size() +
                 '}';
     }
 }
