@@ -7,6 +7,7 @@ import com.group.reproductorjava.utils.LoggerClass;
 import com.group.reproductorjava.utils.Manager;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
 
     @Override
     public boolean getDisco(int id) {
-        Boolean result = false;
+        boolean result = false;
         try {
             Disco disco = manager.find(Disco.class, id);
             if (disco != null) {
@@ -52,16 +53,31 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
 
     @Override
     public boolean saveDisco() {
+        EntityTransaction transaction = null;
+
         try {
-            manager.getTransaction().begin();
-            manager.persist(this);
-            manager.getTransaction().commit();
+            transaction = manager.getTransaction();
+            transaction.begin();
+
+            Disco aux = new Disco();
+            aux.setName(this.getName());
+            aux.setFecha(this.getFecha());
+            aux.setPhoto(this.getPhoto());
+            aux.setArtista(this.getArtista());
+            aux.setCanciones(this.getCanciones());
+
+            manager.persist(aux);
+            transaction.commit();
             logger.info("Saved Correctly");
+
         } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) transaction.rollback();
             logger.warning("Failed to save \n" + e.getMessage());
+            return false;
         }
         return true;
     }
+
 
     @Override
     public boolean deleteDisco(Disco disco) {
