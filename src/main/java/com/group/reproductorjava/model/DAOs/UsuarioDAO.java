@@ -8,6 +8,7 @@ import com.group.reproductorjava.utils.Manager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO extends Usuario implements IUsuarioDAO {
@@ -26,6 +27,9 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
 
     public UsuarioDAO(Usuario user){
         super(user.getId(), user.getName(), user.getEmail(), user.getPhoto(), user.getRol());
+        setCommentList(user.getCommentList());
+        setPlaylists(user.getPlaylists());
+        setSubscriptionList(user.getSubscriptionList());
     }
 
     /**
@@ -138,6 +142,19 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
         if(!this.getSubscriptionList().contains(lista)) return false;
         this.getSubscriptionList().remove(lista);
         return true;
+    }
+
+    public List<Lista> getSubscriptions() {
+        List<Lista> result = new ArrayList<>();
+
+        if (this.getId() > 0) {
+            Usuario aux = manager.find(Usuario.class, this.getId());
+            if (!aux.getSubscriptionList().isEmpty()) {
+                result = aux.getSubscriptionList();
+            }
+        }
+
+        return result;
     }
 
 }
