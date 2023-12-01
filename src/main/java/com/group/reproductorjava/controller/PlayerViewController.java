@@ -8,6 +8,7 @@ import com.group.reproductorjava.model.DTOs.ControlDTO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -26,6 +27,9 @@ public class PlayerViewController {
     private Button play_btn;
 
     @FXML
+    private ProgressBar pb;
+
+    @FXML
     private Button stop_btn;
 
     @FXML
@@ -33,7 +37,6 @@ public class PlayerViewController {
 
     @FXML
     private Button next_btn;
-
     @FXML
     private ImageView songImage;
 
