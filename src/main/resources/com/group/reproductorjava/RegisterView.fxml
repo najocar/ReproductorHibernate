@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.RegisterViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.RegisterViewController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1000.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -40,8 +40,8 @@
             </Label>
             <TextField fx:id="userField" layoutX="71.0" layoutY="306.0" prefHeight="25.0" prefWidth="316.0" promptText="Usuario" />
             <PasswordField fx:id="passField" layoutX="73.0" layoutY="421.0" prefHeight="25.0" prefWidth="316.0" promptText="Contraseña" />
-            <Button fx:id="register_btn" layoutX="120.0" layoutY="490.0" mnemonicParsing="false" onAction="register" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(0, 94, 222);" text="Registrarse" textFill="WHITE" />
-            <Button fx:id="goLogin_btn" layoutX="120.0" layoutY="553.0" mnemonicParsing="false" onAction="goLogin" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(114, 111, 103);" text="Iniciar Sesión" textFill="WHITE" />
+            <Button fx:id="register_btn" layoutX="120.0" layoutY="490.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(0, 94, 222);" text="Registrarse" textFill="WHITE" />
+            <Button fx:id="goLogin_btn" layoutX="120.0" layoutY="553.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(114, 111, 103);" text="Iniciar Sesión" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>

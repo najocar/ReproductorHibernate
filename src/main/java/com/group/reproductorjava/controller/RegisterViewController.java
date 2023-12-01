@@ -1,12 +1,17 @@
 package com.group.reproductorjava.controller;
 
 import com.group.reproductorjava.HelloApplication;
+import com.group.reproductorjava.model.DAOs.UsuarioDAO;
+import com.group.reproductorjava.model.DTOs.ControlDTO;
+import com.group.reproductorjava.model.Entity.Usuario;
+import com.group.reproductorjava.utils.LoggerClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import java.awt.*;
+import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RegisterViewController implements Initializable {
@@ -16,6 +21,8 @@ public class RegisterViewController implements Initializable {
 
     @FXML
     private Button register_btn, goLogin_btn;
+
+    static LoggerClass logger = new LoggerClass(RegisterViewController.class.getName());
 
 
     @Override
@@ -34,17 +41,35 @@ public class RegisterViewController implements Initializable {
 
     @FXML
     private void register() {
-        String username = userField.getText();
-        if(username == null || username.isEmpty() || username.isBlank()) return;
+        try {
+            String username = userField.getText();
+            if((username == null || username.isEmpty() || username.isBlank()) || !(checkUsername(username))) return;
 
-        // comprobar que no exista ningun usuario mas con ese username
+            Usuario user = new Usuario(username, "email", "photo", 1);
+            UsuarioDAO userDAO = new UsuarioDAO(user);
+            userDAO.saveUsuario();
 
-        // guardar el usuario en la base de datos
+            ControlDTO.setUser(userDAO);
 
-        // settear el usuario en el ControlDTO para poder utilizarlo en las distintas vistas
+            logger.info("Register process success");
 
-        // navegar hasta la vista home
+            HelloApplication.setRoot("Home-view");
+        } catch (IOException err) {
+            logger.warning("Error navigate to Home-View");
+            logger.warning(err.getMessage());
+        } catch (Exception err) {
+            logger.warning("Error in register process");
+            logger.warning(err.getMessage());
+        }
+    }
 
-        return;
+    private boolean checkUsername(String username) {
+        List<Usuario> userList = UsuarioDAO.getAllUsuarios();
+        for (Usuario user: userList) {
+            if (user.getName().equals(username)) {
+               return false;
+            }
+        }
+        return true;
     }
 }

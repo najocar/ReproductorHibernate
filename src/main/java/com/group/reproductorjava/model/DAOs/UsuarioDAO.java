@@ -86,6 +86,15 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
             manager.persist(aux);
             transaction.commit();
 
+            setId(aux.getId());
+            setName(aux.getName());
+            setEmail(aux.getEmail());
+            setPhoto(aux.getPhoto());
+            setRol(aux.getRol());
+            setCommentList(aux.getCommentList());
+            setPlaylists(aux.getPlaylists());
+            setSubscriptionList(aux.getSubscriptionList());
+
             logger.info("Saved Correctly");
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) transaction.rollback();
