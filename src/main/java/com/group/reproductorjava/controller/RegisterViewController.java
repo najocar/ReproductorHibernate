@@ -34,6 +34,17 @@ public class RegisterViewController implements Initializable {
 
     @FXML
     private void register() {
+        String username = userField.getText();
+        if(username == null || username.isEmpty() || username.isBlank()) return;
+
+        // comprobar que no exista ningun usuario mas con ese username
+
+        // guardar el usuario en la base de datos
+
+        // settear el usuario en el ControlDTO para poder utilizarlo en las distintas vistas
+
+        // navegar hasta la vista home
+
         return;
     }
 }
