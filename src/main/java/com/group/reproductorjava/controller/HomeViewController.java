@@ -5,6 +5,7 @@ import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
 import com.group.reproductorjava.model.Entity.Lista;
 import com.group.reproductorjava.HelloApplication;
+import com.group.reproductorjava.model.Entity.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,6 +30,14 @@ public class HomeViewController implements Initializable {
     private TableColumn DescriptionColumn;
 
     @FXML
+    private TableColumn SuscriptionNameColumn;
+    @FXML
+    private TableColumn SuscriptionDescriptionColumn;
+
+    @FXML
+    private TableView<Lista> SuscriptionTable;
+
+    @FXML
     private Label userName;
 
     @FXML
@@ -37,6 +46,7 @@ public class HomeViewController implements Initializable {
 
 
     private ObservableList<Lista> listas;
+    private ObservableList<Lista> suscriptions;
 
     UsuarioDAO userDao = new UsuarioDAO(2); //cambiar esto por el id del usuario loggeado
 
@@ -46,10 +56,15 @@ public class HomeViewController implements Initializable {
 
 
         listas = FXCollections.observableArrayList();
+        suscriptions = FXCollections.observableArrayList();
         this.NameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         this.DescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
 
+        this.SuscriptionNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        this.SuscriptionDescriptionColumn.setCellValueFactory(new PropertyValueFactory("description"));
+
         generateListTable();
+        generateSuscriptionTable();
         setInfoUser();
     }
 
@@ -58,6 +73,15 @@ public class HomeViewController implements Initializable {
 
         listas.setAll(ListaDAO.getAllListas());
         this.ListTable.setItems(listas);
+    }
+
+    @FXML
+    public void generateSuscriptionTable() {
+        UsuarioDAO aux = new UsuarioDAO(-1);
+        aux.getUsuario(ControlDTO.getUser().getId());
+//        suscriptions.setAll(aux);
+        System.out.println(aux);
+        this.SuscriptionTable.setItems(suscriptions);
     }
 
     @FXML
