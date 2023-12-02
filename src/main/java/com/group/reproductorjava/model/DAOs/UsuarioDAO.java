@@ -26,10 +26,12 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
     }
 
     public UsuarioDAO(Usuario user){
+
         super(user.getId(), user.getName(), user.getEmail(), user.getPhoto(), user.getRol());
         setCommentList(user.getCommentList());
         setPlaylists(user.getPlaylists());
         setSubscriptionList(user.getSubscriptionList());
+
     }
 
     /**
@@ -139,6 +141,10 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
      */
     public List<Lista> getLista(){
         return (List<Lista>) this.getPlaylists();
+    }
+
+    public List<Lista> getSus(){
+        return (List<Lista>) this.getSubscriptionList();
     }
 
     public boolean addSubscription(Lista lista) {
