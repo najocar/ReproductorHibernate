@@ -95,7 +95,7 @@ public class PlayerViewController {
     public void setInfoUser() {
         userlabel.setText(userDao.getName());
 
-//        String imagePath = userDao.getPhoto();
+        String imagePath = userDao.getPhoto();
 //        if (imagePath != null) {
 //            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
 //            image.setImage(imagenJ);
@@ -107,10 +107,10 @@ public class PlayerViewController {
      *
      * @param songName Nombre de la canción seleccionada.
      */
-//    public void setSongName(String songName) {
-//        this.selectedSongName = songName;
-//        loadSelectedSong();
-//    }
+    public void setSongName(String songName) {
+        this.selectedSongName = songName;
+        loadSelectedSong();
+    }
 
     /**
      * Maneja el evento de reproducción y pausa del reproductor.
