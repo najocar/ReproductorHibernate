@@ -140,7 +140,6 @@ public class PlayerViewController {
             }
 
             mediaPlayer.play();
-            loadSelectedSong();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -183,7 +182,7 @@ public class PlayerViewController {
             songDurationLabel.setText(String.valueOf(currentSong.getDuration()));
             songGenderLabel.setText(currentSong.getGender());
             songRepLabel.setText(String.valueOf(currentSong.getnReproductions()));
-            songDiscLabel.setText(String.valueOf(currentSong.getDisco()));
+            songDiscLabel.setText(String.valueOf(currentSong.getDisco().getName()));
             try {
                 String imagePath = currentSong.getDisco().getPhoto();
                 InputStream inputStream = getClass().getResourceAsStream(imagePath);
