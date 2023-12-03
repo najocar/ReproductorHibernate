@@ -127,27 +127,28 @@ public class PlayerViewController {
         isPlaying = !isPlaying;
     }
 
-//    private void playSelectedSong() {
-//        try {
-//            stop(); // Detener la reproducción actual antes de comenzar una nueva
-//            String songPath = "src/main/resources/com/group/reproductorjava/songs/" + songNameLabel.getText() + ".mp3";
-//            currentSongPath = songPath;
-//
-//            Media media = new Media(new File(songPath).toURI().toString());
-//            mediaPlayer = new MediaPlayer(media);
-//
-//            mediaPlayer.setOnEndOfMedia(() -> stop());
-//
-//            if (currentMediaTime != null) {
-//                mediaPlayer.seek(currentMediaTime);
-//            }
-//
-//            mediaPlayer.play();
-//            loadSelectedSong();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    private void playSelectedSong() {
+        try {
+            stop(); // Detener la reproducción actual antes de comenzar una nueva
+            String songPath = "src/main/resources/com/group/reproductorjava/songs/" + songNameLabel.getText() + ".mp3";
+            currentSongPath = songPath;
+
+            Media media = new Media(new File(songPath).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            mediaPlayer.setOnEndOfMedia(() -> stop());
+
+            if (currentMediaTime != null) {
+                mediaPlayer.seek(currentMediaTime);
+            }
+
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void pause() {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
@@ -186,7 +187,7 @@ public class PlayerViewController {
             songDurationLabel.setText(String.valueOf(currentSong.getDuration()));
             songGenderLabel.setText(currentSong.getGender());
             songRepLabel.setText(String.valueOf(currentSong.getnReproductions()));
-            songDiscLabel.setText(String.valueOf(currentSong.getDisco()));
+            songDiscLabel.setText(String.valueOf(currentSong.getDisco().getName()));
             try {
                 String imagePath = currentSong.getDisco().getPhoto();
                 InputStream inputStream = getClass().getResourceAsStream(imagePath);
