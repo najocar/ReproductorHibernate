@@ -143,7 +143,9 @@ public class PlayerViewController {
             }
 
             mediaPlayer.play();
+
             loadSelectedSong();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
