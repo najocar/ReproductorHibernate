@@ -11,10 +11,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #1f1f1f;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.PlayerViewController">
    <children>
-      <ImageView fitHeight="349.0" fitWidth="461.0" layoutX="251.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/good_times_with_bad_music_1050x700.jpg" />
-         </image>
+      <ImageView fx:id="songImage" fitHeight="349.0" fitWidth="461.0" layoutX="251.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
       <AnchorPane layoutX="767.0" layoutY="62.0" prefHeight="485.0" prefWidth="200.0" style="-fx-background-color: #2c3e50;">
          <children>
@@ -48,11 +45,8 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fx:id="songImage1" fitHeight="133.0" fitWidth="185.0" layoutX="12.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/good_times_with_bad_music_1050x700.jpg" />
-               </image>
-            </ImageView>
+            <!--<ImageView fx:id="songImage" fitHeight="133.0" fitWidth="185.0" layoutX="12.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>-->
             <Separator layoutY="42.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
