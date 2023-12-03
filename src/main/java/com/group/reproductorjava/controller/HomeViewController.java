@@ -77,10 +77,7 @@ public class HomeViewController implements Initializable {
 
     @FXML
     public void generateSuscriptionTable() {
-        UsuarioDAO aux = new UsuarioDAO(-1);
-        aux.getUsuario(ControlDTO.getUser().getId());
-//        suscriptions.setAll(aux);
-        System.out.println(aux);
+        suscriptions.setAll(ControlDTO.getUser().getSubscriptionList());
         this.SuscriptionTable.setItems(suscriptions);
     }
 
@@ -138,7 +135,8 @@ public class HomeViewController implements Initializable {
     public void deleteList() {
         if (selectList()!=null) {
             new ListaDAO(selectList()).deleteLista(selectList());
-            listas.remove(selectList());
+//            listas.remove(selectList());
+            generateListTable();
         }
     }
 
@@ -153,13 +151,22 @@ public class HomeViewController implements Initializable {
     }
 
     @FXML
+    public Lista selectSuscription(){
+        Lista result = null;
+        Lista aux = this.SuscriptionTable.getSelectionModel().getSelectedItem();
+        if (aux != null){
+            result = aux;
+        }
+        return result;
+    }
+
+    @FXML
     public void unsuscribe() {
-        Lista list = selectList();
+        Lista list = selectSuscription();
         if(list == null || ControlDTO.getUser() == null) return;
-
         UsuarioDAO aux = new UsuarioDAO(ControlDTO.getUser());
-
         aux.removeSubscription(list);
         aux.saveUsuario();
+        generateSuscriptionTable();
     }
 }

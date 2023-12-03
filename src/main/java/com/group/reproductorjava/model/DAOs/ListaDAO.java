@@ -141,6 +141,7 @@ public class ListaDAO extends Lista implements IListaDAO {
             if (!manager.contains(lista)) {
                 lista = manager.find(Lista.class, lista.getId());
             }
+            System.out.println("remove");
             manager.remove(lista);
             manager.getTransaction().commit();
         } catch (Exception e) {

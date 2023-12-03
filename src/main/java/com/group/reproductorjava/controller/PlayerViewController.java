@@ -101,22 +101,22 @@ public class PlayerViewController {
     public void setInfoUser() {
         userlabel.setText(userDao.getName());
 
-        String imagePath = userDao.getPhoto();
-        if (imagePath != null) {
-            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
-            image.setImage(imagenJ);
-        }
-        setSongName(ControlDTO.getUser().getName());
+//        String imagePath = userDao.getPhoto();
+//        if (imagePath != null) {
+//            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
+//            image.setImage(imagenJ);
+//        }
+//        setSongName(ControlDTO.getUser().getName());
     }
     /**
      * Establece el nombre de la canción seleccionada.
      *
      * @param songName Nombre de la canción seleccionada.
      */
-    public void setSongName(String songName) {
-        this.selectedSongName = songName;
-        loadSelectedSong();
-    }
+//    public void setSongName(String songName) {
+//        this.selectedSongName = songName;
+//        loadSelectedSong();
+//    }
 
     private boolean isPlaying = false;
 
@@ -126,36 +126,36 @@ public class PlayerViewController {
     @FXML
     private void Play() {
         if (isPlaying) {
-            pause();
+//            pause();
             play_btn.setText("▶");
         } else {
-            playSelectedSong();
+//            playSelectedSong();
             play_btn.setText("⏸");
         }
         isPlaying = !isPlaying;
     }
 
-    private void playSelectedSong() {
-        try {
-            stop(); // Detener la reproducción actual antes de comenzar una nueva
-            String songPath = "src/main/resources/com/group/reproductorjava/songs/" + songNameLabel.getText() + ".mp3";
-            currentSongPath = songPath;
-
-            Media media = new Media(new File(songPath).toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-
-            mediaPlayer.setOnEndOfMedia(() -> stop());
-
-            if (currentMediaTime != null) {
-                mediaPlayer.seek(currentMediaTime);
-            }
-
-            mediaPlayer.play();
-            loadSelectedSong();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    private void playSelectedSong() {
+//        try {
+//            stop(); // Detener la reproducción actual antes de comenzar una nueva
+//            String songPath = "src/main/resources/com/group/reproductorjava/songs/" + songNameLabel.getText() + ".mp3";
+//            currentSongPath = songPath;
+//
+//            Media media = new Media(new File(songPath).toURI().toString());
+//            mediaPlayer = new MediaPlayer(media);
+//
+//            mediaPlayer.setOnEndOfMedia(() -> stop());
+//
+//            if (currentMediaTime != null) {
+//                mediaPlayer.seek(currentMediaTime);
+//            }
+//
+//            mediaPlayer.play();
+//            loadSelectedSong();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void pause() {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
@@ -180,7 +180,7 @@ public class PlayerViewController {
      */
     @FXML
     private void goHome() throws IOException {
-        stop();
+//        stop();
         HelloApplication.setRoot("Home-view");
     }
 
