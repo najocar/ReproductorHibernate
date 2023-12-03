@@ -5,10 +5,8 @@ import com.group.reproductorjava.HelloApplication;
 import com.group.reproductorjava.model.DAOs.CancionDAO;
 import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
-import javafx.animation.KeyFrame;
+
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,15 +17,11 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javazoom.jl.decoder.Bitstream;
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackEvent;
-import javazoom.jl.decoder.JavaLayerException;
+
 import javazoom.jl.player.Player;
 
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -86,7 +80,7 @@ public class PlayerViewController {
     private Duration currentMediaTime;
     private Player player;
     private MediaPlayer mediaPlayer;
-
+    private boolean isPlaying = false;
     private Duration pauseTime;
     private Timeline timeline;
 
@@ -117,8 +111,6 @@ public class PlayerViewController {
 //        this.selectedSongName = songName;
 //        loadSelectedSong();
 //    }
-
-    private boolean isPlaying = false;
 
     /**
      * Maneja el evento de reproducción y pausa del reproductor.
@@ -196,7 +188,7 @@ public class PlayerViewController {
             songRepLabel.setText(String.valueOf(currentSong.getnReproductions()));
             songDiscLabel.setText(String.valueOf(currentSong.getDisco()));
             try {
-                String imagePath = "/com/group/reproductorjava/images/" + currentSong.getName() + ".jpg";
+                String imagePath = currentSong.getDisco().getPhoto();
                 InputStream inputStream = getClass().getResourceAsStream(imagePath);
                 System.out.println(imagePath);
 
