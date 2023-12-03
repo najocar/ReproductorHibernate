@@ -21,7 +21,7 @@ public class Cancion {
     @Column(name = "nreproductions")
     int nReproductions;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cancion")
+    @JoinColumn(name = "id_disco")
     Disco disco;
 
     public Cancion(int id) {

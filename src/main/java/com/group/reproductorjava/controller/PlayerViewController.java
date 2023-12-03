@@ -10,6 +10,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,6 +37,9 @@ public class PlayerViewController {
     private Button play_btn;
 
     @FXML
+    private ProgressBar pb;
+
+    @FXML
     private Button stop_btn;
 
     @FXML
@@ -43,7 +47,6 @@ public class PlayerViewController {
 
     @FXML
     private Button next_btn;
-
     @FXML
     private ImageView songImage;
 
@@ -93,11 +96,11 @@ public class PlayerViewController {
         userlabel.setText(userDao.getName());
 
         String imagePath = userDao.getPhoto();
-        if (imagePath != null) {
-            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
-            image.setImage(imagenJ);
-        }
-        setSongName(ControlDTO.getUser().getName());
+//        if (imagePath != null) {
+//            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
+//            image.setImage(imagenJ);
+//        }
+//        setSongName(ControlDTO.getUser().getName());
     }
     /**
      * Establece el nombre de la canción seleccionada.
@@ -115,14 +118,15 @@ public class PlayerViewController {
     @FXML
     private void Play() {
         if (isPlaying) {
-            pause();
+//            pause();
             play_btn.setText("▶");
         } else {
-            playSelectedSong();
+//            playSelectedSong();
             play_btn.setText("⏸");
         }
         isPlaying = !isPlaying;
     }
+
 
     private void playSelectedSong() {
         try {
@@ -144,6 +148,7 @@ public class PlayerViewController {
             e.printStackTrace();
         }
     }
+
 
     private void pause() {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
@@ -168,7 +173,7 @@ public class PlayerViewController {
      */
     @FXML
     private void goHome() throws IOException {
-        stop();
+//        stop();
         HelloApplication.setRoot("Home-view");
     }
 

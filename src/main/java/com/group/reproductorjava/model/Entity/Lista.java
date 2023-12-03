@@ -23,7 +23,7 @@ public class Lista implements Serializable {
     @JoinColumn(name = "ID_AUTHOR")
     protected Usuario userCreator;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "lista_cancion",
             joinColumns = @JoinColumn(name = "lista_id"),
@@ -116,7 +116,7 @@ public class Lista implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", userCreator=" + userCreator +
+                ", userCreator=" + userCreator.getName() +
                 ", canciones=" + canciones +
                 ", comentarios=" + comentarios +
                 '}';
