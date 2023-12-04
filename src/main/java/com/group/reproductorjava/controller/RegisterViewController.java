@@ -35,7 +35,7 @@ public class RegisterViewController implements Initializable {
         try {
             HelloApplication.setRoot("LoginView");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.warning("Error go to LoginView");
         }
     }
 

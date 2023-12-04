@@ -4,6 +4,7 @@ import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
 import com.group.reproductorjava.HelloApplication;
 import com.group.reproductorjava.model.Entity.Usuario;
+import com.group.reproductorjava.utils.LoggerClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,6 +28,8 @@ public class LoginViewController {
     @FXML
     private Button register_btn;
 
+    static LoggerClass logger = new LoggerClass(LoginViewController.class.getName());
+
     @FXML
     private void login() throws IOException {
         String nickname = UserField.getText();
@@ -43,14 +46,18 @@ public class LoginViewController {
                     break; // Si ya encontramos a Raúl, no es necesario seguir buscando
                 }
                 else{
-                    showError("no se ha encontrado el nickname");
+                    showError("No se ha encontrado nickname");
                 }
             }
         }
     }
     @FXML
     private void register() throws IOException {
-        System.out.println("no está implementado");
+        try {
+            HelloApplication.setRoot("RegisterView");
+        } catch (Exception err) {
+            logger.warning("Error go to Register View");
+        }
     }
 
     private void showError(String mensaje) {
