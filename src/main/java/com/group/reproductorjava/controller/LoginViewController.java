@@ -31,24 +31,30 @@ public class LoginViewController {
     static LoggerClass logger = new LoggerClass(LoginViewController.class.getName());
 
     @FXML
-    private void login() throws IOException {
-        String nickname = UserField.getText();
-        if (nickname.isEmpty()) {
-            showError("El campo del nickname está vacío");
-        } else {
+    private void login() {
+        try {
+            String nickname = UserField.getText();
 
-//            UsuarioDAO UDAO=new UsuarioDAO(1);
-            List<Usuario> users= UsuarioDAO.getAllUsuarios();
-            for (Usuario usuario : users) {
-                if (nickname.equals(usuario.getName())) {
-                    ControlDTO.setUser(usuario);
-                    HelloApplication.setRoot("Home-view");
-                    break; // Si ya encontramos a Raúl, no es necesario seguir buscando
-                }
-                else{
-                    showError("No se ha encontrado nickname");
-                }
+            if (nickname.isEmpty() || nickname.isBlank()) {
+                showError("El campo del nickname está vacío");
+                return;
             }
+
+            Usuario aux = findUser(nickname);
+
+            if (aux == null) {
+                showError("No se ha encontrado nickname");
+                return;
+            }
+
+            ControlDTO.setUser(aux);
+            home();
+
+            logger.info("Login success");
+
+        } catch (Exception err) {
+            logger.warning("Unknown error in login method");
+            logger.warning(err.getMessage());
         }
     }
     @FXML
@@ -56,7 +62,18 @@ public class LoginViewController {
         try {
             HelloApplication.setRoot("RegisterView");
         } catch (Exception err) {
-            logger.warning("Error go to Register View");
+            logger.warning("Error when going to Register view");
+            logger.warning(err.getMessage());
+        }
+    }
+
+    @FXML
+    private void home() throws IOException {
+        try {
+            HelloApplication.setRoot("Home-view");
+        } catch (Exception err) {
+            logger.warning("Error when going to Home view");
+            logger.warning(err.getMessage());
         }
     }
 
@@ -66,6 +83,16 @@ public class LoginViewController {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+    private Usuario findUser(String username) {
+        List<Usuario> userList = UsuarioDAO.getAllUsuarios();
+        for (Usuario user: userList) {
+            if (user.getName().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
 }
