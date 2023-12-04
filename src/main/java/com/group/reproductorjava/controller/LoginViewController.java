@@ -4,6 +4,7 @@ import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
 import com.group.reproductorjava.HelloApplication;
 import com.group.reproductorjava.model.Entity.Usuario;
+import com.group.reproductorjava.utils.LoggerClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,30 +28,53 @@ public class LoginViewController {
     @FXML
     private Button register_btn;
 
-    @FXML
-    private void login() throws IOException {
-        String nickname = UserField.getText();
-        if (nickname.isEmpty()) {
-            showError("El campo del nickname está vacío");
-        } else {
+    static LoggerClass logger = new LoggerClass(LoginViewController.class.getName());
 
-//            UsuarioDAO UDAO=new UsuarioDAO(1);
-            List<Usuario> users= UsuarioDAO.getAllUsuarios();
-            for (Usuario usuario : users) {
-                if (nickname.equals(usuario.getName())) {
-                    ControlDTO.setUser(usuario);
-                    HelloApplication.setRoot("Home-view");
-                    break; // Si ya encontramos a Raúl, no es necesario seguir buscando
-                }
-                else{
-                    showError("no se ha encontrado el nickname");
-                }
+    @FXML
+    private void login() {
+        try {
+            String nickname = UserField.getText();
+
+            if (nickname.isEmpty() || nickname.isBlank()) {
+                showError("El campo del nickname está vacío");
+                return;
             }
+
+            Usuario aux = findUser(nickname);
+
+            if (aux == null) {
+                showError("No se ha encontrado nickname");
+                return;
+            }
+
+            ControlDTO.setUser(aux);
+            home();
+
+            logger.info("Login success");
+
+        } catch (Exception err) {
+            logger.warning("Unknown error in login method");
+            logger.warning(err.getMessage());
         }
     }
     @FXML
     private void register() throws IOException {
-        System.out.println("no está implementado");
+        try {
+            HelloApplication.setRoot("RegisterView");
+        } catch (Exception err) {
+            logger.warning("Error when going to Register view");
+            logger.warning(err.getMessage());
+        }
+    }
+
+    @FXML
+    private void home() throws IOException {
+        try {
+            HelloApplication.setRoot("Home-view");
+        } catch (Exception err) {
+            logger.warning("Error when going to Home view");
+            logger.warning(err.getMessage());
+        }
     }
 
     private void showError(String mensaje) {
@@ -59,6 +83,16 @@ public class LoginViewController {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+    private Usuario findUser(String username) {
+        List<Usuario> userList = UsuarioDAO.getAllUsuarios();
+        for (Usuario user: userList) {
+            if (user.getName().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
 }
