@@ -138,10 +138,12 @@ public class ListaDAO extends Lista implements IListaDAO {
     public boolean deleteLista(Lista lista) {
         try {
             manager.getTransaction().begin();
-            if (!manager.contains(lista)) {
+            if (manager.contains(lista)) {
+                System.out.println("sdfas");
                 lista = manager.find(Lista.class, lista.getId());
             }
-            System.out.println("remove");
+
+            System.out.println(lista.getUsersSucribtions());
             manager.remove(lista);
             manager.getTransaction().commit();
         } catch (Exception e) {

@@ -1,5 +1,8 @@
 package com.group.reproductorjava.model.Entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class Lista implements Serializable {
     protected Usuario userCreator;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(
             name = "lista_cancion",
             joinColumns = @JoinColumn(name = "lista_id"),
@@ -32,7 +36,12 @@ public class Lista implements Serializable {
     protected List<Cancion> canciones = new ArrayList<>();
 
     @OneToMany(mappedBy = "lista", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     protected List<Comentario> comentarios = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "subscriptionList", cascade = {CascadeType.ALL})
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    protected List<Usuario> usersSucribtions = new ArrayList<>();
 
     public Lista(int id, String name, Usuario userCreator, String description) {
         this.id = id;
@@ -95,6 +104,14 @@ public class Lista implements Serializable {
 
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public List<Usuario> getUsersSucribtions() {
+        return usersSucribtions;
+    }
+
+    public void setUsersSucribtions(List<Usuario> usersSucribtions) {
+        this.usersSucribtions = usersSucribtions;
     }
 
     @Override
