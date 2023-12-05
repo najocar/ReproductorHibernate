@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.NewListController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="body" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.NewListController">
     <children>
         <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="758.0" prefWidth="251.0">
             <children>
@@ -20,31 +20,31 @@
                   <Image url="@images/User-avatar.svg.png" />
                </image></ImageView>
                 <Label fx:id="userName" layoutX="99.0" layoutY="216.0" text="Username" />
-                <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="119.0" text="Volver" />
+                <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="119.0" styleClass="btn" text="Volver" />
             </children>
         </Pane>
         <Pane layoutX="250.0" layoutY="-1.0" prefHeight="755.0" prefWidth="751.0">
             <children>
-                <TableView fx:id="SongTable" layoutX="55.0" layoutY="149.0" prefHeight="500.0" prefWidth="627.0">
+                <TableView fx:id="SongTable" layoutX="55.0" layoutY="149.0" prefHeight="500.0" prefWidth="627.0" styleClass="table">
                     <columns>
-                        <TableColumn fx:id="NameColumn" prefWidth="312.0" text="Nombre" />
-                        <TableColumn fx:id="DiscColumn" minWidth="0.0" prefWidth="311.0" text="Género" />
+                        <TableColumn fx:id="NameColumn" prefWidth="312.0" styleClass="column" text="Nombre" />
+                        <TableColumn fx:id="DiscColumn" minWidth="0.0" prefWidth="312.33331298828125" styleClass="column" text="Género" />
                     </columns>
                 </TableView>
-                <Label layoutX="55.0" layoutY="107.0" text="Listas de Reproducción">
+                <Label layoutX="55.0" layoutY="122.0" text="Listas de Reproducción">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Button layoutX="553.0" layoutY="684.0" mnemonicParsing="false" onAction="#createList" prefHeight="25.0" prefWidth="129.0" text="Listo" />
-            <TextField fx:id="nameListField" layoutX="55.0" layoutY="67.0" prefHeight="25.0" prefWidth="183.0" />
-            <Label layoutX="55.0" layoutY="32.0" text="Título de la Lista">
+                <Button layoutX="553.0" layoutY="684.0" mnemonicParsing="false" onAction="#createList" prefHeight="25.0" prefWidth="129.0" styleClass="btn" text="Listo" />
+            <TextField fx:id="nameListField" layoutX="55.0" layoutY="67.0" prefHeight="25.0" prefWidth="183.0" styleClass="input" />
+            <Label layoutX="55.0" layoutY="40.0" text="Título de la Lista">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="descListField" layoutX="285.0" layoutY="67.0" prefHeight="25.0" prefWidth="397.0" />
-            <Label layoutX="285.0" layoutY="32.0" text="Descripción">
+            <TextField fx:id="descListField" layoutX="285.0" layoutY="67.0" prefHeight="25.0" prefWidth="397.0" styleClass="input" />
+            <Label layoutX="285.0" layoutY="40.0" text="Descripción">
                <font>
                   <Font size="18.0" />
                </font>
