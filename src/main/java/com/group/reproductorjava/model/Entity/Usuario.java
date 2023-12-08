@@ -1,6 +1,8 @@
 package com.group.reproductorjava.model.Entity;
 
 import com.group.reproductorjava.model.DAOs.UsuarioDAO;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,6 +43,7 @@ public class Usuario implements Serializable {
             name = "SUSCRIPCIONES",
             joinColumns = @JoinColumn(name = "ID_USUARIO", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "ID_LISTA", nullable = false))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     List<Lista> subscriptionList = new ArrayList<>();
 
     public Usuario() {
