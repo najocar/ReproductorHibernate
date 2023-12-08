@@ -9,21 +9,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.RegisterViewController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.RegisterViewController">
+
    <children>
       <ImageView fitHeight="750.0" fitWidth="1000.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/good_times_with_bad_music_1050x700.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="284.0" layoutY="60.0" prefHeight="636.0" prefWidth="469.0" style="-fx-background-color: white; -fx-opacity: 95%;">
+      <AnchorPane layoutX="284.0" layoutY="60.0" prefHeight="636.0" prefWidth="469.0" style="-fx-background-color: white; -fx-opacity: 95%;" styleClass="pane">
          <children>
-            <Label layoutX="163.0" layoutY="30.0" text="BeatFlow">
+            <Label layoutX="172.0" layoutY="38.0" text="Registrate en">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="163.0" layoutY="68.0" text="BeatFlow">
                <font>
                   <Font name="System Bold" size="33.0" />
                </font>
             </Label>
-            <ImageView fitHeight="100.0" fitWidth="106.0" layoutX="190.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="106.0" layoutX="190.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/logo.jpg" />
                </image>
@@ -38,10 +45,10 @@
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="userField" layoutX="71.0" layoutY="306.0" prefHeight="25.0" prefWidth="316.0" promptText="Usuario" />
-            <PasswordField fx:id="passField" layoutX="73.0" layoutY="421.0" prefHeight="25.0" prefWidth="316.0" promptText="Contraseña" />
-            <Button fx:id="register_btn" layoutX="120.0" layoutY="490.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(0, 94, 222);" text="Registrarse" textFill="WHITE" />
-            <Button fx:id="goLogin_btn" layoutX="120.0" layoutY="553.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(114, 111, 103);" text="Iniciar Sesión" textFill="WHITE" />
+            <TextField fx:id="userField" layoutX="71.0" layoutY="306.0" prefHeight="31.0" prefWidth="316.0" promptText="Usuario" styleClass="input" />
+            <PasswordField fx:id="passField" layoutX="73.0" layoutY="421.0" prefHeight="31.0" prefWidth="316.0" promptText="Contraseña" styleClass="input" />
+            <Button fx:id="register_btn" layoutX="120.0" layoutY="517.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(0, 94, 222);" text="REGISTRARSE" textFill="WHITE" />
+            <Button fx:id="goLogin_btn" layoutX="120.0" layoutY="553.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="219.0" style="-fx-background-color: rgb(114, 111, 103);" text="INICIAR SESIÓN" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>

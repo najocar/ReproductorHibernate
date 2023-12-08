@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #BCDFDF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.HomeViewController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="body" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.HomeViewController">
    <children>
-      <Pane layoutX="868.0" layoutY="-8.0" prefHeight="301.0" prefWidth="173.0" style="-fx-background-color: #439D9D; -fx-rotate: 40deg;" />
+      <Pane layoutX="868.0" layoutY="-8.0" prefHeight="301.0" prefWidth="173.0" style="-fx-background-color: #439D9D; -fx-rotate: 40deg;" styleClass="backgroundPane" />
       <Pane layoutX="-1.0" layoutY="-3.0" prefHeight="758.0" prefWidth="251.0">
          <children>
             <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
@@ -25,38 +25,38 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="119.0" text="&lt; Salir" />
+            <Button layoutX="66.0" layoutY="691.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="25.0" prefWidth="119.0" styleClass="btn" text="SALIR" />
          </children>
       </Pane>
       <Pane layoutX="250.0" layoutY="-1.0" prefHeight="755.0" prefWidth="751.0">
          <children>
-            <TableView fx:id="ListTable" layoutX="55.0" layoutY="97.0" prefHeight="205.0" prefWidth="627.0">
+            <TableView fx:id="ListTable" layoutX="55.0" layoutY="97.0" prefHeight="205.0" prefWidth="627.0" styleClass="table">
               <columns>
-                <TableColumn fx:id="NameColumn" prefWidth="245.66668701171875" text="Nombre" />
-                <TableColumn fx:id="DescriptionColumn" minWidth="0.0" prefWidth="377.0" text="Descripción" />
+                <TableColumn fx:id="NameColumn" prefWidth="245.66668701171875" styleClass="column" text="Nombre" />
+                <TableColumn fx:id="DescriptionColumn" minWidth="0.0" prefWidth="378.5" styleClass="column" text="Descripción" />
               </columns>
             </TableView>
-            <Label layoutX="55.0" layoutY="53.0" text="Tus Listas de Reproducción">
+            <Label layoutX="55.0" layoutY="67.0" text="Tus Listas de Reproducción">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="612.0" layoutY="684.0" mnemonicParsing="false" onAction="#goList" text="Abrir Lista" />
-            <Button layoutX="603.0" layoutY="68.0" mnemonicParsing="false" onAction="#newList" style="-fx-background-color: grey;" text="Nueva Lista" textFill="WHITE" />
-            <Button layoutX="516.0" layoutY="68.0" mnemonicParsing="false" onAction="#deleteList" style="-fx-background-color: grey;" text="Borrar Lista" textFill="WHITE" />
-            <TableView fx:id="SuscriptionTable" layoutX="55.0" layoutY="370.0" prefHeight="301.0" prefWidth="627.0">
+            <Button layoutX="612.0" layoutY="684.0" mnemonicParsing="false" onAction="#goList" styleClass="btn" text="ABRIR LISTA" />
+            <Button layoutX="595.0" layoutY="68.0" mnemonicParsing="false" onAction="#newList" styleClass="btn" text="CREAR LISTA" textFill="WHITE" />
+            <Button layoutX="487.0" layoutY="68.0" mnemonicParsing="false" onAction="#deleteList" styleClass="btn" text="BORRAR LISTA" textFill="WHITE" />
+            <Label layoutX="55.0" layoutY="339.0" text="Tus Suscripciones">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="568.0" layoutY="340.0" mnemonicParsing="false" onAction="#goAllListView" styleClass="btn" text="EXPLORAR LISTAS" />
+            <Button layoutX="407.0" layoutY="340.0" mnemonicParsing="false" onAction="#unsuscribe" styleClass="btn" text="ELIMINAR SUSCRIPCIÓN" />
+            <TableView fx:id="SuscriptionTable" layoutX="55.0" layoutY="370.0" prefHeight="301.0" prefWidth="627.0" styleClass="table">
                <columns>
-                  <TableColumn fx:id="SuscriptionNameColumn" prefWidth="245.66668701171875" text="Nombre" />
-                  <TableColumn fx:id="SuscriptionDescriptionColumn" minWidth="0.0" prefWidth="377.0" text="Descripción" />
+                  <TableColumn fx:id="SuscriptionNameColumn" prefWidth="245.66668701171875" styleClass="column" text="Nombre" />
+                  <TableColumn fx:id="SuscriptionDescriptionColumn" minWidth="0.0" prefWidth="378.33331298828125" styleClass="column" text="Descripción" />
                </columns>
             </TableView>
-            <Label layoutX="55.0" layoutY="326.0" text="Tus Suscripciones">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Button layoutX="588.0" layoutY="341.0" mnemonicParsing="false" onAction="#goAllListView" text="Explorar Listas" />
-            <Button layoutX="455.0" layoutY="341.0" mnemonicParsing="false" onAction="#unsuscribe" text="Eliminar Suscripción" />
          </children>
       </Pane>
    </children>

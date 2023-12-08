@@ -8,34 +8,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.CancionListViewController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="body" stylesheets="@styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group.reproductorjava.controller.CancionListViewController">
    <children>
-      <TableView fx:id="tableSong" layoutX="254.0" layoutY="84.0" prefHeight="333.0" prefWidth="723.0">
+      <TableView fx:id="tableSong" layoutX="254.0" layoutY="84.0" prefHeight="333.0" prefWidth="723.0" styleClass="table">
         <columns>
-          <TableColumn fx:id="colName" prefWidth="720.9538421630859" text="CANCIONES" />
+          <TableColumn fx:id="colName" prefWidth="720.9538421630859" styleClass="column" text="CANCIONES" />
         </columns>
       </TableView>
-      <Label fx:id="labelListaName" layoutX="254.0" layoutY="37.0" text="LISTA">
+      <Label fx:id="labelListaName" layoutX="254.0" layoutY="49.0" text="LISTA">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnHome" layoutX="925.0" layoutY="417.0" mnemonicParsing="false" onAction="#goBack" text="INICIO" />
       <Label fx:id="labelUserName" layoutX="76.0" layoutY="37.0" text="USUARIO">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnPlay" layoutX="867.0" layoutY="417.0" mnemonicParsing="false" onAction="#play" text="PLAY" />
-      <Button fx:id="btnExit" layoutX="61.0" layoutY="681.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="132.0" text="VOLVER" />
-      <TableView fx:id="tableComment" layoutX="254.0" layoutY="487.0" prefHeight="229.0" prefWidth="723.0">
+      <Button fx:id="btnPlay" layoutX="921.0" layoutY="53.0" mnemonicParsing="false" onAction="#play" prefWidth="55.0" styleClass="btn" text="PLAY" />
+      <Button fx:id="btnExit" layoutX="61.0" layoutY="681.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="132.0" styleClass="btn" text="VOLVER" />
+      <TableView fx:id="tableComment" layoutX="254.0" layoutY="487.0" prefHeight="229.0" prefWidth="723.0" styleClass="table">
         <columns>
-          <TableColumn fx:id="colUsuarioComment" prefWidth="160.0" text="Usuario" />
-          <TableColumn fx:id="colComentarioComment" minWidth="0.0" prefWidth="560.0" text="Comentario" />
+          <TableColumn fx:id="colUsuarioComment" prefWidth="160.0" styleClass="column" text="Usuario" />
+          <TableColumn fx:id="colComentarioComment" minWidth="0.0" prefWidth="560.0" styleClass="column" text="Comentario" />
         </columns>
       </TableView>
-      <Button fx:id="btnComment" layoutX="254.0" layoutY="460.0" mnemonicParsing="false" onAction="#addComment" text="Comentar" />
-      <TextField fx:id="inputComment" layoutX="335.0" layoutY="460.0" prefHeight="25.0" prefWidth="641.0" />
+      <Button fx:id="btnComment" layoutX="256.0" layoutY="458.0" mnemonicParsing="false" onAction="#addComment" prefHeight="25.0" prefWidth="78.0" styleClass="btn" text="Comentar" />
+      <TextField fx:id="inputComment" layoutX="335.0" layoutY="458.0" prefHeight="25.0" prefWidth="641.0" styleClass="input" />
    </children>
 
 </AnchorPane>
