@@ -144,7 +144,7 @@ public class ListaDAO extends Lista implements IListaDAO {
             if (manager.getTransaction().isActive()) {
                 manager.getTransaction().rollback();
             }
-            logger.warning("Failed to save the list \n" + e.getMessage());
+            logger.warning("Failed to remove the list \n" + e.getMessage());
         }
         return true;
     }

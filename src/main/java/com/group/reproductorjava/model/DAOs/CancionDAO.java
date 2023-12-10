@@ -100,11 +100,12 @@ public class CancionDAO extends Cancion implements ICancionDAO {
             }
             manager.remove(cancion);
             manager.getTransaction().commit();
+            logger.info("Removed correctly");
         } catch (Exception e) {
             if (manager.getTransaction().isActive()) {
                 manager.getTransaction().rollback();
             }
-            e.printStackTrace();
+            logger.warning("Failed to remove the song \n" + e.getMessage());
         }
         return true;
     }
