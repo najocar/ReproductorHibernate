@@ -93,7 +93,7 @@ public class PlayerViewController {
 
     @FXML
     public void setInfoUser() {
-        userlabel.setText(userDao.getName());
+        userlabel.setText(ControlDTO.getUser().getName());
 
         String imagePath = userDao.getPhoto();
      if (imagePath != null) {

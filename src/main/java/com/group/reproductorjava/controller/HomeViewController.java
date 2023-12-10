@@ -83,13 +83,13 @@ public class HomeViewController implements Initializable {
 
     @FXML
     public void setInfoUser() {
-        userName.setText(userDao.getName());
+        userName.setText(ControlDTO.getUser().getName());
 
-        String imagePath = userDao.getPhoto();
-        if (imagePath != null) {
-            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
-            image.setImage(imagenJ);
-        }
+//        String imagePath = userDao.getPhoto();
+//        if (imagePath != null) {
+//            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
+//            image.setImage(imagenJ);
+//        }
     }
 
     @FXML
