@@ -15,15 +15,6 @@ import java.util.List;
 
 public class ListaDAO extends Lista implements IListaDAO {
 
-    private final static String INSERT = "INSERT INTO lista (nombre,id_user,descripcion) VALUES(?,?,?)";
-    private final static String UPDATE = "UPDATE lista SET nombre=?,descripcion=? WHERE id=?";
-    private final static String DELETE = "DELETE FROM lista WHERE id=?";
-    private final static String SELECTBYID = "SELECT id,nombre,id_user,descripcion FROM lista WHERE id=?";
-    private final static String SELECTALL = "SELECT id,nombre,id_user,descripcion FROM lista";
-    private final static String SELECTBYCREADOR = "SELECT id,nombre,id_user,descripcion FROM user WHERE id_user=?";
-    private final static String SAVESONGS = "INSERT INTO cancion_lista (id_lista, id_cancion) VALUES(?,?)";
-    private final static String DELETESONGS = "DELETE FROM cancion_lista WHERE id=?";
-
     static LoggerClass logger = new LoggerClass(ListaDAO.class.getName());
 
     private static EntityManager manager = Manager.getEntityManager();

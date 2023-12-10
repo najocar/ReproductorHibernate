@@ -19,15 +19,6 @@ import java.util.List;
 
 public class CancionDAO extends Cancion implements ICancionDAO {
 
-    private final static String SELECTALL = "SELECT id, nombre, duracion, genero, n_reproducciones, id_disco FROM cancion";
-    private final static String SELECTBYID = "SELECT id, nombre, duracion, genero, n_reproducciones, id_disco FROM cancion WHERE id = ?";
-    private final static String SELECTBYNAME = "SELECT id, nombre, duracion, genero, n_reproducciones, id_disco FROM cancion WHERE nombre LIKE ?";
-    private final static String SELECTBYGENDER = "SELECT id, nombre, duracion, genero, n_reproducciones, id_disco FROM cancion WHERE genero LIKE ?";
-    private final static String INSERT = "INSERT INTO cancion (nombre, duracion, genero, n_reproducciones, id_disco) VALUES (?, ?, ?, ?, ?)";
-    private final static String DELETE = "DELETE FROM cancion WHERE id = ?";
-    private final static String SELECTSONGBYLIST = "SELECT c.id, c.nombre, c.duracion, c.genero, c.n_reproducciones, c.id_disco FROM cancion c JOIN cancion_lista cl ON c.id = cl.id_cancion WHERE cl.id_lista = ?";
-    private final static String UPDATE = "UPDATE cancion SET nombre = ?, duracion = ?, genero = ?, n_reproducciones = ?, id_disco = ? WHERE id = ?";
-
     static LoggerClass logger = new LoggerClass(CancionDAO.class.getName());
     private static EntityManager manager = Manager.getEntityManager();
 

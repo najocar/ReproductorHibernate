@@ -18,13 +18,6 @@ import javax.persistence.TypedQuery;
 
 public class ArtistaDAO extends Artista implements IArtistaDAO {
 
-    private final static String INSERT = "INSERT INTO artista (nombre, nacionalidad, foto) VALUES (?, ?, ?)";
-    private final static String UPDATE = "UPDATE artista SET nombre=?, foto=?, nacionalidad=? WHERE id=?";
-    private final static String DELETE = "DELETE FROM artista WHERE id=?";
-    private final static String SELECT_BY_ID = "SELECT * FROM artista WHERE id=?";
-    private final static String SELECT_ALL = "SELECT * FROM artista";
-    private final static String SELECT_BY_NAME = "SELECT * FROM artista WHERE nombre=?";
-
     /**
      *
      */
