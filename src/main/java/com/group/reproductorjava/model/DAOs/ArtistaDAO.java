@@ -222,17 +222,4 @@ public class ArtistaDAO extends Artista implements IArtistaDAO {
             return null;
         }
     }
-//
-//    /**
-//     * metodo getdiscos que obtiene los discos que tengan el id del artista
-//     *
-//     * @return list con los discos
-//     */
-//    public List<Disco> getDiscos() {
-//        if (super.getDiscos() == null) {
-//            setDiscos(DiscoDAO.getAllDiscosByArtista(this));
-//        }
-//        return super.getDiscos();
-//    }
-
 }

@@ -143,22 +143,40 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
         return (List<Lista>) this.getPlaylists();
     }
 
+    /**
+     * Retrieves the subscribed lists of the user.
+     * @return A list of subscribed lists.
+     */
     public List<Lista> getSus(){
         return (List<Lista>) this.getSubscriptionList();
     }
 
+    /**
+     * Adds a subscription to the user's subscribed lists.
+     * @param lista The list to be subscribed.
+     * @return true if the subscription is added successfully, false if the list is already subscribed.
+     */
     public boolean addSubscription(Lista lista) {
         if(this.getSubscriptionList().contains(lista)) return false;
         this.getSubscriptionList().add(lista);
         return true;
     }
 
+    /**
+     * Removes a subscription from the user's subscribed lists.
+     * @param lista The list to be unsubscribed.
+     * @return true if the unsubscription is successful, false if the list is not subscribed.
+     */
     public boolean removeSubscription(Lista lista) {
         if(!this.getSubscriptionList().contains(lista)) return false;
         this.getSubscriptionList().remove(lista);
         return true;
     }
 
+    /**
+     * Retrieves the subscribed lists of the user.
+     * @return A list of subscribed lists.
+     */
     public List<Lista> getSubscriptions() {
         List<Lista> result = new ArrayList<>();
 
@@ -171,5 +189,4 @@ public class UsuarioDAO extends Usuario implements IUsuarioDAO {
 
         return result;
     }
-
 }

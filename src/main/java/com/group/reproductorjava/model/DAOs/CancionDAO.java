@@ -54,8 +54,6 @@ public class CancionDAO extends Cancion implements ICancionDAO {
                 setDisco(a.getDisco());
                 result = true;
             }
-//        manager.getTransaction().commit();
-//        manager.close();
             return result;
     }
 
@@ -134,17 +132,4 @@ public class CancionDAO extends Cancion implements ICancionDAO {
         return canciones;
     }
 
-//    /**
-//     * Method to get all Canciones on Disco
-//     * @param idList: int
-//     * @return List<Cancion> | null
-//     * if dont return null, success
-//     */
-//    public static List<Cancion> getCancionesByList(Lista list){
-//        String jpql = "FROM Cancion WHERE lista = :lista";
-//        TypedQuery<Cancion> query = manager.createQuery(jpql, Cancion.class);
-//        query.setParameter("lista", list);
-//        List<Cancion> canciones = query.getResultList();
-//        return canciones;
-//    }
 }
