@@ -139,13 +139,12 @@ public class ListaDAO extends Lista implements IListaDAO {
             }
             manager.remove(lista);
             manager.getTransaction().commit();
+            logger.info("Removed correctly");
         } catch (Exception e) {
             if (manager.getTransaction().isActive()) {
                 manager.getTransaction().rollback();
             }
-            e.printStackTrace();
-        } finally {
-//            manager.close();
+            logger.warning("Failed to save the list \n" + e.getMessage());
         }
         return true;
     }
