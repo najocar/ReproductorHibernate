@@ -6,6 +6,7 @@ import com.group.reproductorjava.model.DAOs.CancionDAO;
 import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
 
+import com.group.reproductorjava.utils.LoggerClass;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,6 +30,7 @@ import java.io.InputStream;
  * Controlador para la vista del reproductor de música.
  */
 public class PlayerViewController {
+    static LoggerClass logger = new LoggerClass(PlayerViewController.class.getName());
 
     @FXML
     private Button back_btn;
@@ -132,7 +134,12 @@ public class PlayerViewController {
             stop(); // Detener la reproducción actual antes de comenzar una nueva
             String songPath = "src/main/resources/com/group/reproductorjava/songs/" + songNameLabel.getText() + ".mp3";
             currentSongPath = songPath;
+            File file = new File(songPath);
 
+            if (!file.exists()) {
+                logger.warning("Error: Archivo no encontrado en la ruta especificada. \n");
+                return;
+            }
             Media media = new Media(new File(songPath).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
@@ -199,7 +206,7 @@ public class PlayerViewController {
                     songImage.setImage(null);
                     songImage.setImage(image);
                 } else {
-                    System.err.println("Error al cargar la imagen. InputStream es nulo.");
+                    logger.warning("Error al cargar la imagen. InputStream es nulo. \n");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
