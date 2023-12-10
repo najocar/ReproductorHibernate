@@ -182,7 +182,7 @@ public class PlayerViewController {
     @FXML
     private void goHome() throws IOException {
         stop();
-        HelloApplication.setRoot("Home-view");
+        HelloApplication.setRoot("CancionListView");
     }
 
     /**
