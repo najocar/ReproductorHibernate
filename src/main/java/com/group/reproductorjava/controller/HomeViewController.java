@@ -71,7 +71,7 @@ public class HomeViewController implements Initializable {
     @FXML
     public void generateListTable() {
 
-        listas.setAll(ListaDAO.getAllListas());
+        listas.setAll(ListaDAO.getListByUser(ControlDTO.getUser()));
         this.ListTable.setItems(listas);
     }
 
