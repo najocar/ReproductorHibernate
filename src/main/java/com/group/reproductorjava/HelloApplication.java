@@ -17,8 +17,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        ControlDTO.setUser(UsuarioDAO.getAllUsuarios().get(0)); // mockusuario
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Home-view.fxml"));//mock vista
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginView.fxml"));//mock vista
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginView.fxml"));
         scene = new Scene(fxmlLoader.load(), 1000, 750);
         stage.setTitle("Reproductor Java!");
