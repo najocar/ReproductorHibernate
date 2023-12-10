@@ -27,6 +27,11 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
         super(id, nombre, fecha, photo, artista);
     }
 
+    /**
+     * Retrieves a disc by its identifier.
+     * @param id The identifier of the disc.
+     * @return true if found and loaded successfully, false otherwise.
+     */
     @Override
     public boolean getDisco(int id) {
         boolean result = false;
@@ -45,12 +50,21 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
         }
         return result;
     }
+
+    /**
+     * Retrieves all discs stored in the database.
+     * @return A list of all stored discs.
+     */
     @Override
     public List<Disco> getAllDiscos() {
         List<Disco> discos = manager.createQuery("SELECT d FROM Disco d").getResultList();
         return discos;
     }
 
+    /**
+     * Saves the disc in the database.
+     * @return true if the operation is successful, false in case of an error.
+     */
     @Override
     public boolean saveDisco() {
         EntityTransaction transaction = null;
@@ -68,7 +82,7 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
 
             manager.persist(aux);
             transaction.commit();
-            logger.info("Saved Correctly");
+            logger.info("Saved correctly");
 
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) transaction.rollback();
@@ -78,7 +92,11 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
         return true;
     }
 
-
+    /**
+     * Deletes a disc from the database.
+     * @param disco The disc to be deleted.
+     * @return true if the operation is successful, false in case of an error or if the disc is null.
+     */
     @Override
     public boolean deleteDisco(Disco disco) {
         try {
@@ -97,4 +115,5 @@ public class DiscoDAO extends Disco implements IDiscoDAO {
         }
         return true;
     }
+
 }
