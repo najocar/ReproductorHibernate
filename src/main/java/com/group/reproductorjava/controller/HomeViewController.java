@@ -6,7 +6,6 @@ import com.group.reproductorjava.model.DTOs.ControlDTO;
 import com.group.reproductorjava.model.Entity.Lista;
 import com.group.reproductorjava.HelloApplication;
 import com.group.reproductorjava.model.Entity.Usuario;
-import com.group.reproductorjava.utils.LoggerClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +17,6 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,7 +49,6 @@ public class HomeViewController implements Initializable {
     private ObservableList<Lista> suscriptions;
 
     UsuarioDAO userDao = new UsuarioDAO(2); //cambiar esto por el id del usuario loggeado
-    static LoggerClass logger = new LoggerClass(HomeViewController.class.getName());
 
 
     @Override
@@ -88,22 +85,11 @@ public class HomeViewController implements Initializable {
     public void setInfoUser() {
         userName.setText(ControlDTO.getUser().getName());
 
-            Usuario currentUser = ControlDTO.getUser();
-            try {
-                String imagePath = currentUser.getPhoto();
-                InputStream inputStream = getClass().getResourceAsStream(imagePath);
-                System.out.println(imagePath);
-
-                if (inputStream != null) {
-                    Image image1 = new Image(inputStream);
-                    image.setImage(null);
-                    image.setImage(image1);
-                } else {
-                    logger.warning("Error al cargar la imagen. InputStream es nulo. \n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-        }
+//        String imagePath = userDao.getPhoto();
+//        if (imagePath != null) {
+//            Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
+//            image.setImage(imagenJ);
+//        }
     }
 
     @FXML

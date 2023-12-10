@@ -6,7 +6,6 @@ import com.group.reproductorjava.model.DAOs.CancionDAO;
 import com.group.reproductorjava.model.DAOs.UsuarioDAO;
 import com.group.reproductorjava.model.DTOs.ControlDTO;
 
-import com.group.reproductorjava.model.Entity.Usuario;
 import com.group.reproductorjava.utils.LoggerClass;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -98,22 +97,11 @@ public class PlayerViewController {
     public void setInfoUser() {
         userlabel.setText(ControlDTO.getUser().getName());
 
-        Usuario currentUser = ControlDTO.getUser();
-        try {
-            String imagePath = currentUser.getPhoto();
-            InputStream inputStream = getClass().getResourceAsStream(imagePath);
-            System.out.println(imagePath);
-
-            if (inputStream != null) {
-                Image image1 = new Image(inputStream);
-                image.setImage(null);
-                image.setImage(image1);
-            } else {
-                logger.warning("Error al cargar la imagen. InputStream es nulo. \n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String imagePath = userDao.getPhoto();
+     if (imagePath != null) {
+           Image imagenJ = new Image(new File("com/group/reproductorjava/images/" +imagePath).toURI().toString());
+           image.setImage(imagenJ);
+       }
        setSongName(ControlDTO.getUser().getName());
     }
     /**

@@ -7,7 +7,6 @@ import com.group.reproductorjava.model.Entity.Cancion;
 import com.group.reproductorjava.HelloApplication;
 import com.group.reproductorjava.model.Entity.Comentario;
 import com.group.reproductorjava.model.DTOs.ComentarioDTO;
-import com.group.reproductorjava.model.Entity.Usuario;
 import com.group.reproductorjava.utils.LoggerClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,11 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -48,9 +44,6 @@ public class CancionListViewController implements Initializable {
     @FXML
     private Label labelListaName, labelUserName;
 
-    @FXML
-    private ImageView UserImg;
-
     private ObservableList<Cancion> songList;
     private ObservableList<ComentarioDTO> commentList;
 
@@ -64,30 +57,11 @@ public class CancionListViewController implements Initializable {
         commentList = FXCollections.observableArrayList();
         this.colUsuarioComment.setCellValueFactory(new PropertyValueFactory("name"));
         this.colComentarioComment.setCellValueFactory(new PropertyValueFactory("message"));
-        loadUser();
+
         loadTable();
         loadView();
     }
-
-    private void loadUser() {
-        Usuario currentUser = ControlDTO.getUser();
-        try {
-            String imagePath = currentUser.getPhoto();
-            InputStream inputStream = getClass().getResourceAsStream(imagePath);
-            System.out.println(imagePath);
-
-            if (inputStream != null) {
-                Image image = new Image(inputStream);
-                UserImg.setImage(null);
-                UserImg.setImage(image);
-            } else {
-                logger.warning("Error al cargar la imagen. InputStream es nulo. \n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+;
     public void loadTable(){
         loadTableSong();
         loadTableComments();
