@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,9 @@ public class AllListViewController implements Initializable {
     @FXML
     private TableColumn colName, colDescription;
 
+    @FXML
+    private Label userName;
+
     private ObservableList<Lista> listaList;
 
     static LoggerClass logger = new LoggerClass(AllListViewController.class.getName());
@@ -39,6 +43,7 @@ public class AllListViewController implements Initializable {
         this.colDescription.setCellValueFactory(new PropertyValueFactory("description"));
 
         loadTable();
+        setInfoUser();
     }
 
     private void loadTable() {
@@ -48,6 +53,11 @@ public class AllListViewController implements Initializable {
         listaList.setAll(aux);
         listTable.setItems(listaList);
         listTable.refresh();
+    }
+
+    @FXML
+    public void setInfoUser() {
+        userName.setText(ControlDTO.getUser().getName());
     }
 
     @FXML
