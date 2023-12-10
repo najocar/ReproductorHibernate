@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -35,6 +36,7 @@
       </TableView>
       <Button fx:id="btnComment" layoutX="256.0" layoutY="458.0" mnemonicParsing="false" onAction="#addComment" prefHeight="25.0" prefWidth="78.0" styleClass="btn" text="Comentar" />
       <TextField fx:id="inputComment" layoutX="335.0" layoutY="458.0" prefHeight="25.0" prefWidth="641.0" styleClass="input" />
+      <ImageView fx:id="UserImg" fitHeight="150.0" fitWidth="200.0" layoutX="27.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 
 </AnchorPane>
